@@ -48,7 +48,7 @@ class DisplayRam {
 				if ((i % this.ram.pageSize) == 0) {
 					let row = "<td></td>";
 					for (let ii = 0; ii < cols; ii++) {
-						let c = "<td>";
+						let c = "<td style='text-align: center;'>";
 						c += (ii * this.unit).toString(16);
 						c += "</td>";
 						if (this.rtl)
