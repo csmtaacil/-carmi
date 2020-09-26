@@ -51,7 +51,7 @@ class DisplayRam {
 						let c = "<td style='text-align: center;'>";
 						c += (ii * this.unit).toString(16);
 						c += "</td>";
-						if (this.rtl)
+						if (this.rtl) 
 							row = c + row;
 						else
 							row = row + c;
