@@ -49,7 +49,7 @@ class DisplayRam {
 					let row = "<td></td>";
 					for (let ii = 0; ii < cols; ii++) {
 						let c = "<td>";
-						c += ii * this.unit;
+						c += (ii * this.unit).toString(16);
 						c += "</td>";
 						if (this.rtl)
 							row = c + row;
