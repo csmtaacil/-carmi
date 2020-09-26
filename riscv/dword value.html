@@ -1,0 +1,49 @@
+<html>
+<head>
+<script type="module">
+import {Ram} from "./Ram.mjs";
+import {DisplayRam} from "./DisplayRam.mjs";
+
+let ram = new Ram;
+let pageAddress = ram.findUnusedPage();
+let address = pageAddress + Math.trunc(Math.random() * (ram.pageSize-3));
+let value = Math.trunc(Math.random() * Math.pow(2,32));
+console.log(value.toString(16));
+
+for (let i = pageAddress; i < pageAddress + ram.pageSize; i++)
+	ram.writeB(i, Math.trunc(Math.random() * 256));
+	
+ram.writeD(address, value);
+ 
+let e = document.getElementById("displayArea");
+let displayRam = new DisplayRam(e, ram);
+let eAddress = document.getElementById("address");
+eAddress.innerHTML = address.toString(16);
+displayRam.display();
+
+function displayAnswer() {
+	let eAnswer = document.getElementById("answer");
+	eAnswer.innerHTML = value.toString(16);
+}
+
+window.displayAnswer = displayAnswer;
+
+</script>
+</head>
+<body>
+<p dir="rtl">
+בזיכרון
+little endian
+מה תוכנה של המילה הכפולה
+(= 4 בתים)
+ בכתובת
+<span id="address"></span>?
+יש לענות בהקסה:
+<input type="text">
+<button onclick="displayAnswer();">Answer</button>
+<span id="answer"></span>
+</p>
+<div id="displayArea">
+</div>
+</body>
+</html>
