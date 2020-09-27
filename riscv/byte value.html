@@ -1,10 +1,21 @@
-<html>
-<head>
+---
+---
+{% include personTop.html %}
+
 <script type="module">
 import {Ram} from "./Ram.mjs";
 import {DisplayRam} from "./DisplayRam.mjs";
 
 let ram = new Ram;
+let eEndian = document.getElementById("endian");
+if (Math.random() < 0.5) {
+	ram.littleEndian = true;
+	eEndian.innerHTML = "little endian";
+} else {
+	ram.littleEndian = false;
+	eEndian.innerHTML = "big endian";
+}
+
 let pageAddress = ram.findUnusedPage();
 let address = pageAddress + Math.trunc(Math.random() * ram.pageSize);
 var value = Math.trunc(Math.random() * 256);
@@ -16,8 +27,12 @@ ram.writeB(address, value);
  
 let e = document.getElementById("displayArea");
 let displayRam = new DisplayRam(e, ram);
+displayRam.addressDigits = 8;
+displayRam.unit = Math.pow(2,Math.trunc(Math.random() * 3));
+
 let eAddress = document.getElementById("address");
-eAddress.innerHTML = address.toString(16);
+eAddress.innerHTML = address.toString(16).padStart(8,"0");
+
 displayRam.display();
 
 function displayAnswer() {
@@ -28,9 +43,10 @@ function displayAnswer() {
 window.displayAnswer = displayAnswer;
 
 </script>
-</head>
-<body>
+
 <p dir="rtl">
+מערכת הזיכרון מאורגנת
+<span id="endian"></span>.
 מה תוכנו של הבית בכתובת
 <span id="address"></span>?
 יש לענות בהקסה:
@@ -38,7 +54,7 @@ window.displayAnswer = displayAnswer;
 <button onclick="displayAnswer();">Answer</button>
 <span id="answer"></span>
 </p>
-<div id="displayArea">
+<div id="displayArea" dir="ltr">
 </div>
 </body>
 </html>

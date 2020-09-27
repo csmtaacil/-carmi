@@ -8,11 +8,11 @@ class DisplayRam {
 		this.ram = ram;
 		this.rtl = false;
 		this.radix = 16;
-		this.leadZ = false;
-		
+		this.addressDigits = 0;
 		this.unit = 1;
 		
 		elem.addEventListener('contextmenu', this.contextMenuEvent);
+//		elem.addEventListener("resize", this.display);	
 	}
 	
 	contextMenuEvent(e) {
@@ -41,14 +41,14 @@ class DisplayRam {
 			let row = "";
 			let kMax = 0;
 			
-			s += "<table id='table' style='text-align: right; font-family: monospace;'>";
+			s += "<table id='table' style='text-align: center; font-family: monospace;'>";
 			for (let key in this.ram.ram) {
 				let k = parseInt(key);
 				if (k < kMax) continue;
 				if ((i % this.ram.pageSize) == 0) {
-					let row = "<td></td>";
+					let row = "<td style='border-bottom: 1px solid black; border-right: 1px solid black;'></td>";
 					for (let ii = 0; ii < cols; ii++) {
-						let c = "<td style='text-align: center;'>";
+						let c = "<td style='text-align: center; border-bottom: 1px solid black;'>";
 						c += (ii * this.unit).toString(16);
 						c += "</td>";
 						if (this.rtl) 
@@ -63,8 +63,13 @@ class DisplayRam {
 				if ((i % cols) == 0) {
 					s += "<tr>";
 					
-					let c = "<td>";
-					c += k.toString(this.radix);
+					let c = "<td style='border-right: 1px solid black;'>";
+					let ks = k.toString(this.radix);
+					if (this.addressDigits > 0) {
+						console.log(this.addressDigits);
+						ks = ks.padStart(this.addressDigits, "0");
+					}
+					c += ks;
 					c += "</td>";
 					
 					row = c;
