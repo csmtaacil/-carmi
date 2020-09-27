@@ -10,14 +10,15 @@ class DisplayRam {
 		this.radix = 16;
 		this.addressDigits = 0;
 		this.unit = 1;
+		this.unitDigits = 0;
 		
-		elem.addEventListener('contextmenu', this.contextMenuEvent);
+//		elem.addEventListener('contextmenu', this.contextMenuEvent);
 //		elem.addEventListener("resize", this.display);	
 	}
 	
-	contextMenuEvent(e) {
-		e.preventDefault();
-	}
+//	contextMenuEvent(e) {
+//		e.preventDefault();
+//	}
 	
 	readValue(key) {
 		switch (this.unit) {
@@ -89,7 +90,10 @@ class DisplayRam {
 				let c = "<td title='" + toolTip + "'>";
 				let v = this.readValue(k);
 				kMax = k + this.unit;
-				c += v.toString(this.radix);
+				let vs = v.toString(this.radix);
+				if (this.unitDigits > 0)
+					vs = vs.padStart(this.unitDigits, "0");
+				c += vs;
 				c += "</td>";
 				if (this.rtl)
 					row = c + row;

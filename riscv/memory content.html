@@ -35,6 +35,7 @@ let e = document.getElementById("displayArea");
 let displayRam = new DisplayRam(e, ram);
 displayRam.addressDigits = 8;
 displayRam.unit = Math.pow(2,Math.trunc(Math.random() * 3));
+displayRam.unitDigits = displayRam.unit * 2;
 if (Math.random() < 0.5)
 	displayRam.rtl = false;
 else
