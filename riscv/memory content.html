@@ -1,10 +1,11 @@
 ---
+layout: risc
 ---
-{% include personTop.html %}
-
 <script type="module">
-import {Ram} from "./Ram.mjs";
-import {DisplayRam} from "./DisplayRam.mjs";
+import {Ram} from "./js/Ram.mjs";
+import {DisplayRam} from "./js/DisplayRam.mjs";
+
+let unit = Math.pow(2,Math.trunc(Math.random() * 3));
 
 let ram = new Ram;
 let eEndian = document.getElementById("endian");
@@ -16,21 +17,28 @@ if (Math.random() < 0.5) {
 	eEndian.innerHTML = "big endian";
 }
 
-
 let pageAddress = ram.findUnusedPage();
-let address = pageAddress + Math.trunc(Math.random() * (ram.pageSize-1));
-var value = Math.trunc(Math.random() * 65536);
+let address = pageAddress + Math.trunc(Math.random() * (ram.pageSize - unit + 1));
+var value = Math.trunc(Math.random() * Math.pow(2,unit*8));
 
 for (let i = pageAddress; i < pageAddress + ram.pageSize; i++)
 	ram.writeB(i, Math.trunc(Math.random() * 256));
 	
-ram.writeW(address, value);
- 
-let e = document.getElementById("displayArea");
+if (unit == 1)
+	ram.writeB(address, value);
+else if (unit == 2)
+	ram.writeW(address, value);
+else if (unit == 4)
+	ram.writeD(address, value);
 
+let e = document.getElementById("displayArea");
 let displayRam = new DisplayRam(e, ram);
 displayRam.addressDigits = 8;
 displayRam.unit = Math.pow(2,Math.trunc(Math.random() * 3));
+if (Math.random() < 0.5)
+	displayRam.rtl = false;
+else
+	displayRam.rtl = true;
 
 
 let eAddress = document.getElementById("address");
@@ -43,15 +51,30 @@ function displayAnswer() {
 	eAnswer.innerHTML = value.toString(16);
 }
 
+function displayDump() {
+	displayRam.display();
+}
+
+let eUnit = document.getElementById("unit");
+if (unit == 1)
+	eUnit.innerHTML = "הבית";
+else if (unit == 2)
+	eUnit.innerHTML = "המילה (=2 בתים)";
+else if (unit == 4)
+	eUnit.innerHTML = "המילה הכפולה (=4 בתים)";
+
 window.displayAnswer = displayAnswer;
+window.displayDump = displayDump;
 
 </script>
-<h2>תוכן זכרון</h2>
+
 <p dir="rtl">
+נתונה מערכת מחשב בה הזיכרון הוא
+byte addressable.
 מערכת הזיכרון מאורגנת
 <span id="endian"></span>.
-מה תוכנה של המילה 
-(= 2 בתים)
+מה תוכן
+<span id="unit"></span>
  בכתובת
 <span id="address"></span>?
 יש לענות בהקסה:
@@ -59,7 +82,8 @@ window.displayAnswer = displayAnswer;
 <button onclick="displayAnswer();">Answer</button>
 <span id="answer"></span>
 </p>
+<p>
+<button onclick="displayDump();">Redisplay dump</button>
+</p>	
 <div id="displayArea" dir="ltr">
 </div>
-</body>
-</html>
