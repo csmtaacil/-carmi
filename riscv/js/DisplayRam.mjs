@@ -31,8 +31,8 @@ class DisplayRam {
 		}
 		
 		this.importantAddresses.push(addr);
-		let before = Math.trunc(Math.random() * 0);
-		let after  = Math.trunc(Math.random() * 0);
+		let before = Math.trunc(Math.random() * 30);
+		let after  = Math.trunc(Math.random() * 30);
 		for (let i = 0; i <= before; i++)
 			if (addr-i >= 0) this.displayedAddresses.push(addr-i);
 
