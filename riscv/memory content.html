@@ -24,12 +24,7 @@ var value = Math.trunc(Math.random() * Math.pow(2,unit*8));
 for (let i = pageAddress; i < pageAddress + ram.pageSize; i++)
 	ram.writeB(i, Math.trunc(Math.random() * 256));
 	
-if (unit == 1)
-	ram.writeB(address, value);
-else if (unit == 2)
-	ram.writeW(address, value);
-else if (unit == 4)
-	ram.writeD(address, value);
+
 
 let e = document.getElementById("displayArea");
 let displayRam = new DisplayRam(e, ram);
@@ -40,6 +35,20 @@ if (Math.random() < 0.5)
 	displayRam.rtl = false;
 else
 	displayRam.rtl = true;
+if (unit == 1) {
+	ram.writeB(address, value);
+	displayRam.addImportantAddress(address);
+} else if (unit == 2) {
+	ram.writeW(address, value);
+	displayRam.addImportantAddress(address);
+	displayRam.addImportantAddress(address+1);
+} else if (unit == 4) {
+	ram.writeD(address, value);
+	displayRam.addImportantAddress(address);
+	displayRam.addImportantAddress(address+1);
+	displayRam.addImportantAddress(address+2);
+	displayRam.addImportantAddress(address+3);
+}
 
 
 let eAddress = document.getElementById("address");

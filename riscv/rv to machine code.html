@@ -90,12 +90,12 @@ function randomReg() {
 
 function randomImm20() {
 	let imm = -Math.pow(2,19) + 
-		Math.trunc(Math.random() * Math.pow(2,19));
+		Math.trunc(Math.random() * Math.pow(2,20));
 	return ({str: imm.toString(10), code: imm});
 }
 
 function randomImm12() {
-	let imm = -2048 + Math.trunc(Math.random() * 2048);
+	let imm = -2048 + Math.trunc(Math.random() * 4096);
 	return ({str: imm.toString(10), code: imm});
 }
 
@@ -149,7 +149,6 @@ function randomInstruction() {
 	case Btype:
 		rs1 = randomReg();
 		rs2 = randomReg();
-		console.log(rs2);
 		is = randomImm12();
 		c = v[2] + (is & 15) * 128 + v[3]*Math.pow(2,12) +
 					rs1.code * Math.pow(2, 15) + 

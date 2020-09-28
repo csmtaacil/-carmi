@@ -27,7 +27,12 @@ class Ram {
 		}
 		let l = this.ram[al];
 		let h = this.ram[ah];
-		return ((h<<8) + l);
+		if (l == undefined  ||  h == undefined)
+			return (undefined);
+		let v = (h * 256) + l;
+//		console.log("readw", addr.toString(16), v.toString(16));
+		
+		return (v);
 	}	
 
 	writeW(addr, v) {
@@ -63,10 +68,15 @@ class Ram {
 		let b2 = this.ram[a2];
 		let b3 = this.ram[a3];
 		
+		if (b0 == undefined || b1 == undefined ||
+			b2 == undefined || b3 == undefined)
+			return (undefined);
+		
 		let v = b3;
 		v = (v * 256) + b2;
 		v = (v * 256) + b1;
 		v = (v * 256) + b0;
+//		console.log("readD", addr.toString(16), v.toString(16));
 		return (v);
 	}	
 
