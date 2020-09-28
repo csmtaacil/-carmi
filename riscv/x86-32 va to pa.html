@@ -1,0 +1,109 @@
+---
+layout: risc
+---
+<script type="module">
+import {Ram} from "./js/Ram.mjs";
+import {DisplayRam} from "./js/DisplayRam.mjs";
+
+let va = Math.trunc(Math.random() * Math.pow(2,32));
+let pp = Math.trunc(Math.random() * Math.pow(2,20)) * 4096;
+let pa = pp + (va % 4096);
+
+let i0 = Math.trunc(va / Math.pow(2, 22));
+let i1 = Math.trunc(va / 4096) % 1024;
+
+let eVa = document.getElementById("va");
+eVa.innerHTML = va.toString(16).padStart(8, "0");
+
+let ram = new Ram;
+ram.littleEndian = true;
+
+let e = document.getElementById("displayArea");
+let displayRam = new DisplayRam(e, ram);
+displayRam.addressDigits = 8;
+displayRam.unit = 4;
+displayRam.unitDigits = 8;
+displayRam.rtl = false;
+
+
+let extTbl = ram.findUnusedPage();
+
+// Mask place
+for (let o = 0; o < 4096; o += 4) {
+	let d = Math.trunc(Math.random() * 1024) * 4096 + 7;
+	ram.writeD(extTbl + o, d);
+}
+
+let eCr3 = document.getElementById("cr3");
+eCr3.innerHTML = extTbl.toString(16).padStart(8, "0");
+
+let inrTbl = ram.findUnusedPage();
+// Mask place
+for (let o = 0; o < 4096; o += 4) {
+	let d = Math.trunc(Math.random() * 1024) * 4096 + 7;
+	ram.writeD(inrTbl + o, d);
+}
+
+let addr = extTbl + i0 * 4;
+ram.writeD(addr, inrTbl | 7);
+displayRam.showD(addr);
+
+
+addr = inrTbl + i1 * 4;
+ram.writeD(addr, pp | 7);
+displayRam.showD(addr);
+
+/*
+for (let i = pageAddress; i < pageAddress + ram.pageSize; i++)
+	ram.writeB(i, Math.trunc(Math.random() * 256));
+*/
+	
+
+
+
+/*
+	ram.writeD(address, value);
+	displayRam.addImportantAddress(address);
+	displayRam.addImportantAddress(address+1);
+	displayRam.addImportantAddress(address+2);
+	displayRam.addImportantAddress(address+3);
+*/
+
+
+displayRam.display();
+
+function displayAnswer() {
+	let eAnswer = document.getElementById("answer");
+	eAnswer.innerHTML = pa.toString(16).padStart(8, "0");
+}
+
+function displayDump() {
+	displayRam.display();
+}
+
+window.displayAnswer = displayAnswer;
+window.displayDump = displayDump;
+
+</script>
+
+<p dir="rtl">
+אנו עובדים עם 
+ה-mmu
+של
+x86-32.
+לאיזה כתובת פיזית תתורגם הכתובת הוירטואלית
+<span id="va"></span>
+כאשר האוגר
+cr3
+יכיל
+<span id="cr3"></span>?
+</p>
+<p>
+<button onclick="displayAnswer();">Answer</button>
+<span id="answer"></span>
+</p>
+<p>
+<button onclick="displayDump();">Redisplay dump</button>
+</p>	
+<div id="displayArea" dir="ltr">
+</div>

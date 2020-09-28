@@ -24,6 +24,13 @@ class DisplayRam {
 		this.displayedAddresses = null;	// Should be private
 	}
 	
+	showD(addr) {
+		this.addImportantAddress(addr);
+		this.addImportantAddress(addr+1);
+		this.addImportantAddress(addr+2);
+		this.addImportantAddress(addr+3);
+	}
+	
 	addImportantAddress(addr) {
 		if (this.importantAddresses == null) {
 			this.importantAddresses = [];
