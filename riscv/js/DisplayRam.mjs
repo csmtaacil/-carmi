@@ -1,6 +1,6 @@
 export {DisplayRam};
 
-import {Ram} from "./Ram.mjs";
+import {Ram} from "Ram.mjs";
 
 class DisplayRam {
 	constructor(elem, ram) {
