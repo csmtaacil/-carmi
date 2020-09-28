@@ -29,7 +29,7 @@ class DisplayRam {
 			this.importantAddresses = [];
 			this.displayedAddresses = [];
 		}
-		
+ 		
 		this.importantAddresses.push(addr);
 		let before = Math.trunc(Math.random() * 30);
 		let after  = Math.trunc(Math.random() * 30);
