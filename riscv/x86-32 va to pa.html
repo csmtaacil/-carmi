@@ -87,8 +87,35 @@ function displayDump() {
 	displayRam.display();
 }
 
+let helpMode = false;
+function setHelpMode() {
+	helpMode = !helpMode;
+	let e = document.getElementById("help");
+	e.checked = helpMode;
+	
+	e = document.getElementById("cr3");
+	e.title = "";
+	if (helpMode) {
+		let pfn = extTbl;
+		e.title="tbl=" + pfn.toString(16);
+	}
+
+	e = document.getElementById("va");
+	e.title = "";
+	if (helpMode) {
+		let i0 = Math.trunc(Math.trunc(va / Math.pow(2, 22)) % 1024);
+		let i1 = Math.trunc(Math.trunc(va / 4096) % 1024);
+		let off = Math.trunc(va % 4096);
+		e.title="i0=" + i0.toString(16)+ "; " +
+				"i1=" + i1.toString(16) + "; " +
+				"off=" + off.toString(16);
+	}
+
+}
+
 window.displayAnswer = displayAnswer;
 window.displayDump = displayDump;
+window.setHelpMode = setHelpMode;
 
 </script>
 
@@ -103,6 +130,9 @@ x86-32.
 cr3
 יכיל
 <span id="cr3"></span>?
+</p>
+<p dir="ltr">
+<input type="checkbox" id="help" onclick="setHelpMode();"> Help mode
 </p>
 <p>
 <button onclick="displayAnswer();">Answer</button>
