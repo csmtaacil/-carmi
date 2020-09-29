@@ -3,20 +3,21 @@ layout: risc
 ---
 <script type="module">
 //
-//  x 8 6   -  3 2   m m u
+//  r  v  3  2    m   m   u
 //
 import {Ram} from "./Ram.mjs";
 import {DisplayRam} from "./DisplayRam.mjs";
 
-function fillGarbage(page) {// Garbage looking as legit translation page
+function fillGarbage(page) {// Garbage looking as legit
 	for (let o = 0; o < 4096; o += 4) {
-		let d = Math.trunc(Math.random() * 1024) * 4096 + 7;
+		let d = Math.trunc(Math.random() * 1024) * 1024 + 7;
 		ram.writeD(page + o, d);
 	}
 }
 
+
 let va = Math.trunc(Math.random() * Math.pow(2,32));
-let pp = Math.trunc(Math.random() * Math.pow(2,22)) * 4096;
+let pp = Math.trunc(Math.random() * Math.pow(2,20)) * 4096;
 let pa = pp + (va % 4096);
 
 let i0 = Math.trunc(va / Math.pow(2, 22));
@@ -43,8 +44,8 @@ fillGarbage(inrTbl);
 
 let extEntry = extTbl + i0 * 4;
 let inrEntry = inrTbl + i1 * 4;
-ram.writeD(extEntry, inrTbl | 7);
-ram.writeD(inrEntry, pp | 7);
+ram.writeD(extEntry, Math.trunc(inrTbl/4) + 7);
+ram.writeD(inrEntry, Math.trunc(pp/4) + 7);
 
 for (let i = 0; i < 3; i++) {
 	let addr;
@@ -53,7 +54,7 @@ for (let i = 0; i < 3; i++) {
 		addr = extTbl + o;
 	} while (addr == extEntry);
 	let pp = ram.findUnusedPage();
-	ram.writeD(addr, pp | 7);
+	ram.writeD(addr, Math.trunc(pp/4) + 7);
 	fillGarbage(pp);
 	displayRam.showD(pp + Math.trunc(Math.random() * 4096));
 }
@@ -65,7 +66,7 @@ for (let i = 0; i < 3; i++) {
 		addr = inrTbl + o;
 	} while (addr == inrEntry);
 	let pp = ram.findUnusedPage();
-	ram.writeD(addr, pp | 7);
+	ram.writeD(addr, Math.trunc(pp/4) | 7);
 	fillGarbage(pp);
 	displayRam.showD(pp + Math.trunc(Math.random() * 4096));
 }
@@ -73,8 +74,11 @@ for (let i = 0; i < 3; i++) {
 displayRam.showD(extEntry);
 displayRam.showD(inrEntry);
 
-let eCr3 = document.getElementById("cr3");
-eCr3.innerHTML = extTbl.toString(16).padStart(8, "0");
+let eSatp = document.getElementById("satp");
+let satp = Math.pow(2,31) +
+			Math.trunc(Math.random() * 512) * Math.pow(2,22) + 
+			Math.trunc(extTbl / 1024);
+eSatp.innerHTML = satp.toString(16).padStart(8, "0");
 
 displayRam.display();
 
@@ -96,13 +100,13 @@ window.displayDump = displayDump;
 אנו עובדים עם 
 ה-mmu
 של
-x86-32.
+rv32.
 לאיזה כתובת פיזית תתורגם הכתובת הוירטואלית
 <span id="va"></span>
 כאשר האוגר
-cr3
+satp
 יכיל
-<span id="cr3"></span>?
+<span id="satp"></span>?
 </p>
 <p>
 <button onclick="displayAnswer();">Answer</button>
