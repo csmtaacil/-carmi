@@ -2,7 +2,7 @@
 <html>
 	<head>
 	{% include gtag.js %}
-	<title>Carmi Merimovich, Mempry Games</title>
+	<title>Carmi Merimovich, hardware/software exercises</title>
 	<link rel="stylesheet" type="text/css" href="/css/main.css">
 	<link rel="icon" href="data:;base64,=">	
 	</head>
@@ -27,7 +27,7 @@
 		<a href="//www.mta.ac.il">
 		the Academic College of Tel-Aviv.</a>
 		Here's a somewhat 
-		<a href="https://www.cs.mta.ac.il/staff/Carmi/mePublished_frml_he.html">
+		<a href="https://www.cs.mta.ac.il/staff/Carmi/mePublished_frml_en.html">
 		more formal page.</a></h4>
 		<h4>
 		The plan is to have here lots of exercises 
@@ -43,11 +43,11 @@
 							| append: "_he.html" %}
 		{% endif %}
 		<a href="{{s}}">
-		<table style="border: 0; text-align: center; vertical-align: middle;">
-		<tr><td>
+		<table style="border: 0; text-align: center;">
+		<tr><td style="padding:0;">
 		<img  class="flag" src="/images/il.svg" />
 		</td></tr>
-		<tr><td style="font-size: xx-small;">
+		<tr><td style="font-size: xx-small;  padding:0;">
 			לעברית</td></tr>
 		</table>
 		</a>
@@ -56,3 +56,6 @@
 	</tbody>
 	</table>
 	</header>
+	{% if page.shortText %}
+	<h2>{{page.shortText}}</h2>
+	{% endif %}
