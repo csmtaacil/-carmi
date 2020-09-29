@@ -1,10 +1,12 @@
 ---
-layout: risc_en
+layout: risc_he
 ---
-<h1>Hardware/Software questions.</h1>
+<h1>
+שאלות חומרה/תוכנה	
+</h1>
 <ol>
 {% for  question in site.pages %}
-	{% if question.name contains "_en.html"%}
+	{% if question.name contains "_he.html"%}
 		{% if question.shortText %}
 		<li>
 		<a href="{{question.name}}">{{question.shortText}}</a>

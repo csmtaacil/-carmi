@@ -1,9 +1,6 @@
----
-layout: risc
----
 <script type="module">
 //
-//  r  v  3  2    m   m   u
+//  r  v  3  2    v a   t o   p a
 //
 import {Ram} from "./Ram.mjs";
 import {DisplayRam} from "./DisplayRam.mjs";
@@ -124,30 +121,4 @@ function setHelpMode() {
 window.displayAnswer = displayAnswer;
 window.displayDump = displayDump;
 window.setHelpMode = setHelpMode;
-
 </script>
-
-<p dir="rtl">
-אנו עובדים עם 
-ה-mmu
-של
-rv32.
-לאיזה כתובת פיזית תתורגם הכתובת הוירטואלית
-<span id="va"></span>
-כאשר האוגר
-satp
-יכיל
-<span id="satp"></span>?
-</p>
-<p dir="ltr">
-<input type="checkbox" id="help" onclick="setHelpMode();"> Help mode
-</p>
-<p>
-<button onclick="displayAnswer();">Answer</button>
-<span id="answer"></span>
-</p>
-<p>
-<button onclick="displayDump();">Redisplay dump</button>
-</p>	
-<div id="displayArea" dir="ltr">
-</div>

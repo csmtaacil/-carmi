@@ -1,0 +1,30 @@
+---
+layout: risc_he
+shortText: תוכן כתובת בזיכרון.
+---
+{% include_relative memory_content.html %}
+
+<p dir="rtl">
+נתונה מערכת מחשב בה הזיכרון הוא
+byte addressable.
+מערכת הזיכרון מאורגנת
+<span id="endian"></span>.
+מה תוכן
+<span id="unit1" style="display: none;">הבית</span>
+<span id="unit2" style="display: none;">
+המילה
+(= 2 בתים)</span>
+<span id="unit4" style="display: none;">
+המילה הכפולה
+(= 4 בתים)</span>
+ בכתובת
+<span id="address"></span>?
+<p>
+<button onclick="displayAnswer();">הצג תשובה</button>
+<span id="answer"></span>
+</p>
+<p>
+<button onclick="displayDump();">הצג מחדש תמונת זיכרון</button>
+</p>	
+<div id="displayArea" dir="ltr">
+</div>

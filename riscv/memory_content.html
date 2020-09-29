@@ -1,7 +1,7 @@
----
-layout: risc
----
 <script type="module">
+//
+// m e m o r y _ c o n t e n t 
+//
 import {Ram} from "./Ram.mjs";
 import {DisplayRam} from "./DisplayRam.mjs";
 
@@ -65,35 +65,10 @@ function displayDump() {
 	displayRam.display();
 }
 
-let eUnit = document.getElementById("unit");
-if (unit == 1)
-	eUnit.innerHTML = "הבית";
-else if (unit == 2)
-	eUnit.innerHTML = "המילה (=2 בתים)";
-else if (unit == 4)
-	eUnit.innerHTML = "המילה הכפולה (=4 בתים)";
+let eUnit = document.getElementById("unit"+unit);
+eUnit.style.display = "inline";
 
 window.displayAnswer = displayAnswer;
 window.displayDump = displayDump;
 
 </script>
-
-<p dir="rtl">
-נתונה מערכת מחשב בה הזיכרון הוא
-byte addressable.
-מערכת הזיכרון מאורגנת
-<span id="endian"></span>.
-מה תוכן
-<span id="unit"></span>
- בכתובת
-<span id="address"></span>?
-יש לענות בהקסה:
-<input type="text">
-<button onclick="displayAnswer();">Answer</button>
-<span id="answer"></span>
-</p>
-<p>
-<button onclick="displayDump();">Redisplay dump</button>
-</p>	
-<div id="displayArea" dir="ltr">
-</div>

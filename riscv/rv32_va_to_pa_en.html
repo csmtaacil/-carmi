@@ -1,0 +1,26 @@
+---
+layout: risc_en
+shortText: (riscv32) Translating virtual address to physical address.
+---
+{% include_relative rv32_va_to_pa.html %}
+<p>
+The mmu at hand is of the rv32 architecture.
+To what physical address will the virtual address
+<span id="va"></span>
+be translated when the register
+satp
+contains 
+<span id="satp"></span>?
+</p>
+<p dir="ltr">
+<input type="checkbox" id="help" onclick="setHelpMode();"> Help mode
+</p>
+<p>
+<button onclick="displayAnswer();">Answer</button>
+<span id="answer"></span>
+</p>
+<p>
+<button onclick="displayDump();">Redisplay dump</button>
+</p>	
+<div id="displayArea" dir="ltr">
+</div>

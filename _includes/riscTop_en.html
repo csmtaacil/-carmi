@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	{% include gtag.js %}
+	<title>Carmi Merimovich, Mempry Games</title>
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<link rel="icon" href="data:;base64,=">	
+	</head>
+	<body>
+	<header>
+	<table>
+   <colgroup>
+       <col span="1" style="width: 1%;">
+       <col span="1" >
+       <col span="1" style="width: 4%;">
+    </colgroup>
+	<tbody>
+	<tr>
+	<td class="picture">
+		<img style='height: 6Em;' src="carmi.jpg">
+	</td>
+	<td>
+	<h2>Carmi Merimovich</h2>
+		<h4>I am a senior faculty of the
+		<a href="//www.cs.mta.ac.il">School of Computer Science</a>
+		at
+		<a href="//www.mta.ac.il">
+		the Academic College of Tel-Aviv.</a>
+		Here's a somewhat 
+		<a href="https://www.cs.mta.ac.il/staff/Carmi/mePublished_frml_he.html">
+		more formal page.</a></h4>
+		<h4>
+		The plan is to have here lots of exercises 
+			in Architecture and OS for	
+				the amusment of the audience.
+		</h4>
+	</td>
+	<td>
+		{% if page.name == 'index.html'%}
+			{% assign s = 'index_he.html' %}
+		{% else %}
+			{% assign s = page.name | remove: "_en.html"
+							| append: "_he.html" %}
+		{% endif %}
+		<a href="{{s}}">
+		<table style="border: 0; text-align: center; vertical-align: middle;">
+		<tr><td>
+		<img  class="flag" src="/images/il.svg" />
+		</td></tr>
+		<tr><td style="font-size: xx-small;">
+			לעברית</td></tr>
+		</table>
+		</a>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	</header>

@@ -1,0 +1,24 @@
+---
+layout: risc_en
+shortText: (x86-32) Virtual address to physical address translation.
+---
+{% include_relative x86-32_va_to_pa.html %}
+<p>
+The mmu at hand is of the x86-32 architecture.
+To what physical address will the virtual address
+<span id="va"></span>
+be translated, when register cr3 contains
+<span id="cr3"></span>?
+</p>
+<p dir="ltr">
+<input type="checkbox" id="help" onclick="setHelpMode();"> Help mode
+</p>
+<p>
+<button onclick="displayAnswer();">Answer</button>
+<span id="answer"></span>
+</p>
+<p>
+<button onclick="displayDump();">Redisplay dump</button>
+</p>	
+<div id="displayArea" dir="ltr">
+</div>

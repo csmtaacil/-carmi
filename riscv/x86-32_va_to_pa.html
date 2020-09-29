@@ -1,6 +1,3 @@
----
-layout: risc
----
 <script type="module">
 //
 //  x 8 6   -  3 2   m m u
@@ -116,30 +113,4 @@ function setHelpMode() {
 window.displayAnswer = displayAnswer;
 window.displayDump = displayDump;
 window.setHelpMode = setHelpMode;
-
 </script>
-
-<p dir="rtl">
-אנו עובדים עם 
-ה-mmu
-של
-x86-32.
-לאיזה כתובת פיזית תתורגם הכתובת הוירטואלית
-<span id="va"></span>
-כאשר האוגר
-cr3
-יכיל
-<span id="cr3"></span>?
-</p>
-<p dir="ltr">
-<input type="checkbox" id="help" onclick="setHelpMode();"> Help mode
-</p>
-<p>
-<button onclick="displayAnswer();">Answer</button>
-<span id="answer"></span>
-</p>
-<p>
-<button onclick="displayDump();">Redisplay dump</button>
-</p>	
-<div id="displayArea" dir="ltr">
-</div>

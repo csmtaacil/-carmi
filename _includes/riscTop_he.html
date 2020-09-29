@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html dir='rtl'>
+	<head>
+	{% include gtag.js %}
+		<title> כרמי מרימוביץ, משחקי זיכרון</title>
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<link rel="icon" href="data:;base64,=">	
+	</head>
+	<body>
+	<header>
+	<table>
+   <colgroup>
+       <col span="1" style="width: 1%;">
+       <col span="1" >
+       <col span="1" style="width: 4%;">
+    </colgroup>
+	<tbody>
+	<tr>
+	<td class="picture">
+		<img style='height: 6Em;' src="carmi.jpg">
+	</td>
+	<td>
+	<h2>כרמי מרימוביץ</h2>
+		<h4>אני חבר סגל אקדמי בכיר
+		<a href="//www.cs.mta.ac.il">בבית הספר למדעי המחשב</a>
+		של
+		<a href="//www.mta.ac.il">
+		המכללה האקדמית תל-אביב.</a>
+		הנה דף 
+		<a href="https://www.cs.mta.ac.il/staff/Carmi/mePublished_frml_he.html">
+		יותר רשמי.</a></h4>
+		<h4>
+		התוכנית היא לשים פה מגוון תרגילים בארכיטקטורה ומערכות הפעלה להנאת הקהל.
+		</h4>
+	</td>
+	<td>
+		{% if page.name == 'index_he.html' %}
+			{% assign s = 'index.html'%}
+		{% else %}
+			{% assign s = page.name | remove: "_he.html"
+							| append: "_en.html" %}
+		{% endif %}
+		<a href="{{s}}">
+		<table style="border: 0; text-align: center; vertical-align: middle;">
+		<tr><td>
+		<img  class="flag" src="/images/us.svg" />
+		</td></tr>
+		<tr><td style="font-size: xx-small;">
+			to english</td></tr>
+		</table>
+		</a>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	</header>
