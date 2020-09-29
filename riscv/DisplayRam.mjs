@@ -84,6 +84,7 @@ class DisplayRam {
 			let addrMax = 0;
 			let prevAddrLine = -1;
 			let rowNums = 0;
+			let firstRow = true;
 			
 			s += "<table id='table' style='text-align: center; font-family: monospace;'>";
 			for (let idx = 0; idx < this.displayedAddresses.length; idx++) {
@@ -93,12 +94,16 @@ class DisplayRam {
 				let addrLine = addr & m;
 //				console.log(addr.toString(16), m.toString(16), addrLine.toString(16));
 
-				if (addrLine != prevAddrLine + cols * this.unit  ||  rowNums > 10) {
-					let emptyRow = "<tr style='background-color: white;'><td></td>";
-					for (let i = 0; i < cols; i++)
-						emptyRow += "<td></td>";
-					emptyRow += "</tr>";
-					s += emptyRow;
+				if (addrLine != prevAddrLine + cols * this.unit ||  rowNums > 10) {
+					if (firstRow) 
+						firstRow = false;
+					else {
+						let emptyRow = "<tr style='background-color: white;'><td></td>";
+						for (let i = 0; i < cols; i++)
+							emptyRow += "<td></td>";
+						emptyRow += "</tr>";
+						s += emptyRow;
+					}
 					s += "<tr>";
 					let b;
 					if (this.rtl)
