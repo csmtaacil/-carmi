@@ -77,7 +77,7 @@ displayRam.showD(inrEntry);
 let eSatp = document.getElementById("satp");
 let satp = Math.pow(2,31) +
 			Math.trunc(Math.random() * 512) * Math.pow(2,22) + 
-			Math.trunc(extTbl / 1024);
+			Math.trunc(extTbl / 4096);
 eSatp.innerHTML = satp.toString(16).padStart(8, "0");
 
 displayRam.display();
