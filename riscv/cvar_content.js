@@ -18,7 +18,7 @@ ram.writeB(address+4, valueA);
 ram.writeB(address+8, valueB);
 
 
-let esp = address + 8;
+let esp = address;
 let Esp = document.getElementById("esp");
 Esp.innerHTML = esp.toString(16);
 
