@@ -1,5 +1,5 @@
 //
-// m e m o r y _ c o n t e n t 
+// c v a r _ c o n t e n t
 //
 import {Ram} from "./Ram.mjs";
 import {DisplayRam} from "./DisplayRam.mjs";
@@ -9,14 +9,16 @@ let ram = new Ram;
 ram.littleEndian = true;
 ram.numPages = Math.pow(2,20); 
 
-let pageAddress = ram.findUnusedPage();
-let address = pageAddress + Math.trunc(Math.random() * 1020) * 4;
-var valueA = Math.trunc(Math.random() * 256);
-var valueB = Math.trunc(Math.random() * 256);
-ram.writeB(address, valueA);
-ram.writeB(address+4, valueB);
+let valueA = Math.trunc(Math.random() * 256);
+let valueB = Math.trunc(Math.random() * 256);
 
-let esp = address + 4;
+let pageAddress = ram.findUnusedPage();
+let address = pageAddress + Math.trunc(Math.random() * 1022) * 4;
+ram.writeB(address+4, valueA);
+ram.writeB(address+8, valueB);
+
+
+let esp = address + 8;
 let Esp = document.getElementById("esp");
 Esp.innerHTML = esp.toString(16);
 
@@ -32,6 +34,7 @@ else
 
 displayRam.showD(address);
 displayRam.showD(address+4);
+displayRam.showD(address+8);
 
 
 
