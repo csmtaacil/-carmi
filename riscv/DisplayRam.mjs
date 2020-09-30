@@ -94,6 +94,11 @@ class DisplayRam {
 			let rowNums = 0;
 			let firstRow = true;
 			
+			s += "<div>";
+			s += '<button id="displayDump">Redisplay dump</button>';
+			s += "</div>";
+			s += "<div dir='ltr'>";
+			
 			s += "<table id='table' style='text-align: center; font-family: monospace;'>";
 			for (let idx = 0; idx < this.displayedAddresses.length; idx++) {
 				let addr = this.displayedAddresses[idx];
@@ -172,7 +177,7 @@ class DisplayRam {
 				addrMax = addrLine + cols * this.unit;
 				s += row + "</tr>";
 			}
-
+			s += "</table></div>";
 			this.elem.innerHTML = s;
 		
 			let t = document.getElementById('table');
@@ -183,7 +188,10 @@ class DisplayRam {
 				again = false;
 			else
 				cols = cols / 2;
-			
 		}
+		let eDisplayDump = document.getElementById("displayDump");
+		let that = this;
+		eDisplayDump.addEventListener("click",
+				function() {that.display();});
 	}
 }

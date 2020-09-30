@@ -110,6 +110,8 @@ function setHelpMode() {
 
 }
 
-window.displayAnswer = displayAnswer;
-window.displayDump = displayDump;
-window.setHelpMode = setHelpMode;
+let eAnswerButton = document.getElementById("answerButton");
+eAnswerButton.addEventListener("click", displayAnswer); 
+
+let eHelp = document.getElementById("help");
+eHelp.addEventListener("click", setHelpMode); 

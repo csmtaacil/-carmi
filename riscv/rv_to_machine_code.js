@@ -169,4 +169,5 @@ function displayAnswer() {
 	eAnswer.innerHTML = ri.code.toString(2).padStart(32,"0");
 }
 
-window.displayAnswer = displayAnswer;
+let eAnswerButton = document.getElementById("answerButton");
+eAnswerButton.addEventListener("click", displayAnswer); 

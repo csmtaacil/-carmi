@@ -1,5 +1,5 @@
 //
-// c v a r _ c o n t e n t
+// c _ a b s
 //
 import {Ram} from "./Ram.mjs";
 import {DisplayRam} from "./DisplayRam.mjs";
@@ -49,9 +49,6 @@ else
 displayRam.showD(address);
 displayRam.showD(address+4);
 
-
-
-
 displayRam.display();
 
 function displayAnswer() {
@@ -59,11 +56,7 @@ function displayAnswer() {
 	eAnswer.innerHTML = value.toString(16);
 }
 
-function displayDump() {
-	displayRam.display();
-}
 
-
-window.displayAnswer = displayAnswer;
-window.displayDump = displayDump;
+let eAnswerButton = document.getElementById("answerButton");
+eAnswerButton.addEventListener("click", displayAnswer); 
 

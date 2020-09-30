@@ -57,13 +57,9 @@ function displayAnswer() {
 	eAnswer.innerHTML = value.toString(16);
 }
 
-function displayDump() {
-	displayRam.display();
-}
-
 let eUnit = document.getElementById("unit"+unit);
 eUnit.style.display = "inline";
 
-window.displayAnswer = displayAnswer;
-window.displayDump = displayDump;
+let eAnswerButton = document.getElementById("answerButton");
+eAnswerButton.addEventListener("click", displayAnswer); 
 

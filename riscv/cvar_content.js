@@ -47,11 +47,8 @@ function displayAnswer() {
 	eAnswer.innerHTML = v.toString(16);
 }
 
-function displayDump() {
-	displayRam.display();
-}
+let eAnswerButton = document.getElementById("answerButton");
+eAnswerButton.addEventListener("click", displayAnswer); 
 
 
-window.displayAnswer = displayAnswer;
-window.displayDump = displayDump;
 
