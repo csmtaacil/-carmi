@@ -1,4 +1,3 @@
-<script type="module">
 //
 // m e m o r y _ c o n t e n t 
 //
@@ -68,4 +67,3 @@ eUnit.style.display = "inline";
 window.displayAnswer = displayAnswer;
 window.displayDump = displayDump;
 
-</script>
