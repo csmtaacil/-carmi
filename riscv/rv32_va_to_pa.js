@@ -1,4 +1,3 @@
-<script type="module">
 //
 //  r  v  3  2    v a   t o   p a
 //
@@ -122,4 +121,3 @@ function setHelpMode() {
 window.displayAnswer = displayAnswer;
 window.displayDump = displayDump;
 window.setHelpMode = setHelpMode;
-</script>

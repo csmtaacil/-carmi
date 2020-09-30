@@ -1,4 +1,3 @@
-<script type="module">
 //
 // r v   t o   m a c h i n e   c o d e
 //
@@ -171,4 +170,3 @@ function displayAnswer() {
 }
 
 window.displayAnswer = displayAnswer;
-</script>

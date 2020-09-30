@@ -31,7 +31,6 @@ class Ram {
 		if (l == undefined  ||  h == undefined)
 			return (undefined);
 		let v = (h * 256) + l;
-//		console.log("readw", addr.toString(16), v.toString(16));
 		
 		return (v);
 	}	
@@ -77,7 +76,6 @@ class Ram {
 		v = (v * 256) + b2;
 		v = (v * 256) + b1;
 		v = (v * 256) + b0;
-//		console.log("readD", addr.toString(16), v.toString(16));
 		return (v);
 	}	
 
@@ -110,6 +108,12 @@ class Ram {
 	}
 	
 	findUnusedPage() {
-		return (Math.trunc(Math.random()*this.numPages) * this.pageSize);
+		let pp;
+		do {
+			pp = Math.trunc(Math.random()*this.numPages) * this.pageSize;
+		} while (this.ram[pp] != undefined);
+		for (let i = 0; i < this.pageSize; i++)
+			this.ram[pp + i] = Math.trunc(Math.random()*256);
+		return (pp);
 	}
 }
