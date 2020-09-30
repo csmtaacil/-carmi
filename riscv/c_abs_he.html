@@ -1,0 +1,37 @@
+---
+layout: risc_he
+shortText: (C/זיכרון) absint
+---
+<script src="./c_abs.js" type="module">
+</script>
+
+<p>
+נתונה הפונקציה הבאה המערכת
+	x86-32:
+</p>
+<div   style='direction: ltr; font-family: Consolas,"courier new";
+  color: crimson;
+  background-color: #f1f1f1;
+  padding: 1px;
+  font-size: 105%;'><pre>
+<span id="unit01" style="display:none;">char</span><span id="unit02" style="display:none;">short</span><span id="unit04" style="display:none;">int</span> absint(<span id="unit11" style="display:none;">char</span><span id="unit12" style="display:none;">short</span><span id="unit14" style="display:none;">int</span> x) {
+	return x<0? -x : x;
+}</pre>
+</div>
+
+<p>
+מה ערך החזרה מהפונקציה
+אם בכניסה אליה ערך
+	<var>esp</var>
+	הוא
+	<span id="esp"></span>?
+</p>
+<p>
+<button onclick="displayAnswer();">תשובה</button>
+<span id="answer"></span>
+</p>
+<p>
+<button onclick="displayDump();">הצג שוב מפת זיכרון</button>
+</p>	
+<div id="displayArea" dir="ltr">
+</div>

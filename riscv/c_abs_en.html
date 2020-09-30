@@ -1,0 +1,35 @@
+---
+layout: risc_en
+shortText: (C/memory) absint
+---
+<script src="./c_abs.js" type="module">
+</script>
+
+<p>
+Consider the following function in an
+	x86-32 system:
+</p>
+<div   style='font-family: Consolas,"courier new";
+  color: crimson;
+  background-color: #f1f1f1;
+  padding: 1px;
+  font-size: 105%;'><pre>
+<span id="unit01" style="display:none;">char</span><span id="unit02" style="display:none;">short</span><span id="unit04" style="display:none;">int</span> absint(<span id="unit11" style="display:none;">char</span><span id="unit12" style="display:none;">short</span><span id="unit14" style="display:none;">int</span> x) {
+	return x<0? -x : x;
+}</pre>
+</div>
+
+<p>
+What is the return value of this function if
+	on entering the function the value	
+		of <var>esp</var> is <span id="esp"></span>?
+</p>
+<p>
+<button onclick="displayAnswer();">Answer</button>
+<span id="answer"></span>
+</p>
+<p>
+<button onclick="displayDump();">Redisplay dump</button>
+</p>	
+<div id="displayArea" dir="ltr">
+</div>
