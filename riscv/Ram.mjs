@@ -6,6 +6,7 @@ class Ram {
 		this.ram = {};
 		this.littleEndian = true;
 		this.pageSize = 4096;
+		this.numPages = Math.pow(2,19); // Sign issue
 	}
 	
 	writeB(addr, val) {
@@ -109,6 +110,6 @@ class Ram {
 	}
 	
 	findUnusedPage() {
-		return (Math.trunc(Math.random()*1024) * this.pageSize);
+		return (Math.trunc(Math.random()*this.numPages) * this.pageSize);
 	}
 }

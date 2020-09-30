@@ -35,6 +35,7 @@
 				the amusment of the audience.
 		</h4>
 	</td>
+	{%if page.name == 'index.html' or  page.name == 'index_he.html' %}
 	<td>
 		{% if page.name == 'index.html'%}
 			{% assign s = 'index_he.html' %}
@@ -52,6 +53,7 @@
 		</table>
 		</a>
 	</td>
+	{% endif %}
 	</tr>
 	</tbody>
 	</table>

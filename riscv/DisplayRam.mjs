@@ -24,6 +24,15 @@ class DisplayRam {
 		this.displayedAddresses = null;	// Should be private
 	}
 	
+	showB(addr) {
+		this.addImportantAddress(addr);
+	}
+
+	showW(addr) {
+		this.addImportantAddress(addr);
+		this.addImportantAddress(addr+1);
+	}
+
 	showD(addr) {
 		this.addImportantAddress(addr);
 		this.addImportantAddress(addr+1);
@@ -73,7 +82,6 @@ class DisplayRam {
 		if (this.displayedAddresses == null)
 			return;
 
-//		console.log(this.displayedAddresses);
 		let cols = 1024;
 		let again = true;
 		
@@ -90,9 +98,8 @@ class DisplayRam {
 			for (let idx = 0; idx < this.displayedAddresses.length; idx++) {
 				let addr = this.displayedAddresses[idx];
 				if (addr < addrMax) continue;
-				let m = ~(cols * this.unit - 1);
-				let addrLine = addr & m;
-//				console.log(addr.toString(16), m.toString(16), addrLine.toString(16));
+				let m = cols * this.unit;
+				let addrLine = addr - addr % m;
 
 				if (addrLine != prevAddrLine + cols * this.unit ||  rowNums > 10) {
 					if (firstRow) 

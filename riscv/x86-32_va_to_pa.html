@@ -24,6 +24,7 @@ eVa.innerHTML = va.toString(16).padStart(8, "0");
 
 let ram = new Ram;
 ram.littleEndian = true;
+ram.numPages = Math.pow(2,20);  // Sign issue
 
 let e = document.getElementById("displayArea");
 let displayRam = new DisplayRam(e, ram);
