@@ -11,6 +11,7 @@ class DisplayRam {
 		this.addressDigits = 0;	// Minimal number of digits
 		this.unit = 1;		// dump unit (1,2,4)
 		this.unitDigits = 0;	// dump unit minimal digits
+		this.signed = false;
 		this.showControls = false;
 		this.importantAddresses = null;
 		this.displayedAddress = null;	// Should be private
@@ -81,8 +82,35 @@ class DisplayRam {
 	display() {
 		if (this.displayedAddresses == null)
 			return;
-
-		let cols = 1024;
+			
+		let eHtml = document.getElementsByTagName("html");
+		eHtml = eHtml[0];
+		let tDump, tSigned, tLtr, tByte, tWord,tDword, tBinary, tOctal, tDecimal, tHexa;
+		if (eHtml.dir == 'rtl') {
+			tDump = "צייר טבלה מחדש";
+			tSigned = "עם סימן";
+			tLtr = "כתיבה משמאל";
+			tByte="בית";
+			tWord="מילה";
+			tDword="מילה כפולה";
+			tBinary = "בינרי";
+			tOctal = "אוקטלי";
+			tDecimal = "עשרוני";
+			tHexa = "הקסה";
+		} else {
+			tDump = "Redraw table";
+			tSigned = "Signed";
+			tLtr = "ltr";
+			tByte="Byte";
+			tWord="Word";
+			tDword="Double word";
+			tBinary = "Binary";
+			tDecimal = "Decimal";
+			tOctal = "Octdal";
+			tHexa = "Hexa";
+		}
+		
+		let cols = 128;
 		let again = true;
 		
 		while (again) {
@@ -94,12 +122,27 @@ class DisplayRam {
 			let rowNums = 0;
 			let firstRow = true;
 			
-			s += "<div>";
-			s += '<button id="displayDump">Redisplay dump</button>';
+			s += "<div style='giid-auto-flow:row;'>";
+			s += '<button id="displayDump">' + tDump + '</button>';
+			s += '<input type="checkbox" id="displayRam.ltr">' + tLtr;
+			s += '<input type="checkbox" id="displayRam.signed">' + tSigned;
+			s += '<span style="border: 1px solid black; margin-inline-start: 2px; margin-top: 4px;	white-space: nowrap;">';
+			s += '<input type="radio" id="displayRam.binary">' + tBinary;
+			s += '<input type="radio" id="displayRam.octal">' + tOctal;
+			s += '<input type="radio" id="displayRam.decimal">' + tDecimal;
+			s += '<input type="radio" id="displayRam.hexa">' + tHexa;
+			s += "</span>";
+			s += '<span style="border: 1px solid black; margin-inline-start: 2px; margin-top: 4px; white-space: nowrap;">';
+			s += '<input type="radio" id="displayRam.byte">byte';
+			s += '<input type="radio" id="displayRam.word">word';
+			s += '<input type="radio" id="displayRam.dword">double&nbsp;word';
+			s += "</span>";
+			//s += "</td></tr>";
+			//s += "</table>";	
 			s += "</div>";
 			s += "<div dir='ltr'>";
 			
-			s += "<table id='table' style='text-align: center; font-family: monospace;'>";
+			s += "<table id='table' style='text-align: center; font-family: monospace; margin-top: 10px;'>";
 			for (let idx = 0; idx < this.displayedAddresses.length; idx++) {
 				let addr = this.displayedAddresses[idx];
 				if (addr < addrMax) continue;
@@ -163,9 +206,16 @@ class DisplayRam {
 					let v = this.readValue(addrLine + off);
 					let vs = "";
 					if (v != undefined) {
-						vs = v.toString(this.radix);
-						if (this.unitDigits > 0)
-							vs = vs.padStart(this.unitDigits, "0");
+						if (this.signed) {
+							if (v < 2**(this.unit*8-1))
+								vs = v.toString(this.radix);
+							else
+								vs = "-" + (2**(this.unit*8)-v).toString(this.radix);
+						} else {
+							vs = v.toString(this.radix);
+							if (this.unitDigits > 0)
+								vs = vs.padStart(this.unit * 2, "0");
+						}
 					}
 					c += vs;
 					c += "</td>";
@@ -193,5 +243,109 @@ class DisplayRam {
 		let that = this;
 		eDisplayDump.addEventListener("click",
 				function() {that.display();});
+
+		that = this;
+		let eLtr = document.getElementById("displayRam.ltr");
+		eLtr.addEventListener("click",
+				function() {that.clickLtr();});
+		eLtr.checked = !this.rtl;
+			
+		that = this;
+		let eSigned = document.getElementById("displayRam.signed");
+		eSigned.addEventListener("click",
+				function() {that.clickSigned();});
+		eSigned.checked = this.signed;
+
+		that = this;
+		let eBinary = document.getElementById("displayRam.binary");
+		eBinary.addEventListener("click",
+				function() {that.clickBinary();});
+		eBinary.checked = (this.radix == 2);
+
+		that = this;
+		let eOctal = document.getElementById("displayRam.octal");
+		eOctal.addEventListener("click",
+				function() {that.clickOctal();});
+		eOctal.checked = (this.radix == 8);
+
+		that = this;
+		let eDecimal = document.getElementById("displayRam.decimal");
+		eDecimal.addEventListener("click",
+				function() {that.clickDecimal();});
+		eDecimal.checked = (this.radix == 10);
+
+		that = this;
+		let eHexa = document.getElementById("displayRam.hexa");
+		eHexa.addEventListener("click",
+				function() {that.clickHexa();});
+		eHexa.checked = (this.radix == 16);
+
+		that = this;
+		let eByte = document.getElementById("displayRam.byte");
+		eByte.addEventListener("click",
+				function() {that.clickByte();});
+		eByte.checked = (this.unit == 1);
+
+		that = this;
+		let eWord = document.getElementById("displayRam.word");
+		eWord.addEventListener("click",
+				function() {that.clickWord();});
+		eWord.checked = (this.unit == 2);
+
+		that = this;
+		let eDword = document.getElementById("displayRam.dword");
+		eDword.addEventListener("click",
+				function() {that.clickDword();});
+		eDword.checked = (this.unit == 4);
+
+	}
+	
+	clickLtr() {
+		this.rtl = !this.rtl;
+		this.display();
+	}
+
+	clickSigned() {
+		if (this.radix == 10)
+			this.signed = true;
+		else
+			this.signed = !this.signed;
+		this.display();
+	}
+
+	clickBinary() {
+		this.radix = 2;
+		this.display();
+	}
+
+	clickOctal() {
+		this.radix = 8;
+		this.display();
+	}
+
+	clickDecimal() {
+		this.radix = 10;
+		this.signed = true;
+		this.display();
+	}
+
+	clickHexa() {
+		this.radix = 16;
+		this.display();
+	}
+
+	clickByte() {
+		this.unit = 1;
+		this.display();
+	}
+
+	clickWord() {
+		this.unit = 2;
+		this.display();
+	}
+
+	clickDword() {
+		this.unit = 4;
+		this.display();
 	}
 }

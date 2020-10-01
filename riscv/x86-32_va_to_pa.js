@@ -6,7 +6,7 @@ import {DisplayRam} from "./DisplayRam.mjs";
 
 function fillGarbage(page) {// Garbage looking as legit translation page
 	for (let o = 0; o < 4096; o += 4) {
-		let d = Math.trunc(Math.random() * 1024) * 4096 + 7;
+		let d = Math.trunc(Math.random() * (2**20)) * 4096 + 7;
 		ram.writeD(page + o, d);
 	}
 }
@@ -80,9 +80,6 @@ function displayAnswer() {
 	eAnswer.innerHTML = pa.toString(16).padStart(8, "0");
 }
 
-function displayDump() {
-	displayRam.display();
-}
 
 let helpMode = false;
 function setHelpMode() {
