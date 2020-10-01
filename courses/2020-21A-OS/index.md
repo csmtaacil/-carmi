@@ -18,5 +18,8 @@ We will use slides which
 	[Moshe Sulamy](https://www.cs.mta.ac.il/staff/Moshe/mePublished_year_en.html) was kind enough
 	to develop.
 	
+Grading. 70% final exam, 30% assignments.
+The TA is [Tzvi Melamed](http://tzvimelamed.com/lab/).
+	
 - [Introduction](01_intro.pdf)
 - [Processes](02_processes.pdf)
