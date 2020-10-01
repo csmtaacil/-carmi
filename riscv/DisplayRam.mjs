@@ -133,9 +133,9 @@ class DisplayRam {
 			s += '<input type="radio" id="displayRam.hexa">' + tHexa;
 			s += "</span>";
 			s += '<span style="border: 1px solid black; margin-inline-start: 2px; margin-top: 4px; white-space: nowrap;">';
-			s += '<input type="radio" id="displayRam.byte">byte';
-			s += '<input type="radio" id="displayRam.word">word';
-			s += '<input type="radio" id="displayRam.dword">double&nbsp;word';
+			s += '<input type="radio" id="displayRam.byte">' + tByte;
+			s += '<input type="radio" id="displayRam.word">' + tWord;
+			s += '<input type="radio" id="displayRam.dword">' + tDword;;
 			s += "</span>";
 			//s += "</td></tr>";
 			//s += "</table>";	
