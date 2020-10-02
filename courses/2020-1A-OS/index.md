@@ -25,7 +25,7 @@ The TA was, is, and hopefully will be,
 
 We will use slides prepared by
 	[Moshe Sulamy:](https://www.cs.mta.ac.il/staff/Moshe/mePublished_year_en.html)
-	
+
 	
 1. [Introduction](01_intro.pdf)
 1. [Processes](02_processes.pdf)
