@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
+	<title>{{page.title}}</title>
 	{% include gtag.js %}
-	<title>Carmi Merimovich, hardware/software exercises</title>
 	<link rel="stylesheet" type="text/css" href="/css/main.css">
 	<link rel="icon" href="data:;base64,=">	
 	</head>
@@ -30,8 +30,8 @@
 		<a href="https://www.cs.mta.ac.il/staff/Carmi/mePublished_frml_en.html">
 		more formal page.</a></h4>
 	</td>
-	{% if page.name == 'index.html' or  page.name == 'index_he.html' %}
 	<td>
+	{% if page.name == 'index.html' or  page.name == 'index_he.html' %}
 		{% if page.name == 'index.html'%}
 			{% assign s = 'index_he.html' %}
 		{% else %}
@@ -41,14 +41,14 @@
 		<a href="{{site.baseurl}}{{s}}">
 		<table style="border: 0; text-align: center;">
 		<tr><td style="padding:0;">
-		<img  class="flag" src="/images/il.svg" />
+		<img  class="flag" src="{{site.baseurl}}/images/il.svg" />
 		</td></tr>
 		<tr><td style="font-size: xx-small;  padding:0;">
 			לעברית</td></tr>
 		</table>
 		</a>
-	</td>
 	{% endif %}
+	</td>
 	</tr>
 	</tbody>
 	</table>

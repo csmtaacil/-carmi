@@ -1,0 +1,154 @@
+\frametitle{sh example: Pipe}
+Typing:
+\begin{lstlisting}
+cat a.bat | sh
+\end{lstlisting}
+will use the code:
+	\only<2>{{\color{red}where the parent {\tt\bf sh} executes:}}
+	\only<3>{{\color{red}the first child {\tt\bf sh} executes:}}
+	\only<4>{{\color{red}the second child {\tt\bf sh} executes:}}
+\par\noindent\small
+\begin{onlyenv}<1>
+\begin{minipage}[t]{2.3in}
+\begin{lstlisting}[frame=single]
+	int p[2];
+	pipe(p);
+	pid = fork();
+	if (pid == 0) {
+		close (1);
+		dup(p[1]);
+		close(p[0]);
+		close(p[1]);
+		char *argv[] = {"cat", 0};
+		exec("cat", argv);
+		exit();
+	}
+\end{lstlisting}
+\end{minipage}
+\begin{minipage}[t]{2.3in}
+\begin{lstlisting}[frame=single]
+	pid = fork()
+	if (pid == 0) {
+		close(0);
+		dup(p[0]);
+		close(p[0]);
+		close(p[1]);
+		char *argv[] = {"sh", 0};
+		exec("sh", argv);
+		exit();	
+	}
+	close(p[0]);
+	close(p[1]);
+	wait();
+	wait();
+\end{lstlisting}
+\end{minipage}
+\end{onlyenv}
+\begin{onlyenv}<2>
+\begin{minipage}[t]{2.3in}
+\begin{lstlisting}[frame=single]
+	int p[2];
+	@pipe(p);
+	pid = fork();
+	if (pid == 0) @{
+		close (1);
+		dup(p[1]);
+		close(p[0]);
+		close(p[1]);
+		char *argv[] = {"cat", 0};
+		exec("cat", argv);
+		exit();
+	}
+\end{lstlisting}
+\end{minipage}
+\begin{minipage}[t]{2.3in}
+\begin{lstlisting}[frame=single]
+	@pid = fork()
+	if (pid == 0) @{
+		close(0);
+		dup(p[0]);
+		close(p[0]);
+		close(p[1]);
+		char *argv[] = {"sh", 0};
+		exec("sh", argv);
+		exit();	
+	}
+	@close(p[0]);
+	close(p[1]);
+	wait();
+	wait();@
+\end{lstlisting}
+\end{minipage}
+\end{onlyenv}
+\begin{onlyenv}<3>
+\begin{minipage}[t]{2.2in}
+\begin{lstlisting}[frame=single]
+	int p[2];
+	pipe(p);
+	@pid =@ fork();
+	@if (pid == 0) {
+		close (1);
+		dup(p[1]);
+		close(p[0]);
+		close(p[1]);
+		char *argv[] = {"cat", 0};
+		exec("cat", argv);
+		exit();
+	}@
+\end{lstlisting}
+\end{minipage}
+\begin{minipage}[t]{2.3in}
+\begin{lstlisting}[frame=single]
+	pid = fork()
+	if (pid == 0) {
+		close(0);
+		dup(p[0]);
+		close(p[0]);
+		close(p[1]);
+		char *argv[] = {"sh", 0};
+		exec("sh", argv);
+		exit();	
+	}
+	close(p[0]);
+	close(p[1]);
+	wait();
+	wait();
+\end{lstlisting}
+\end{minipage}
+\end{onlyenv}
+\begin{onlyenv}<4>
+\begin{minipage}[t]{2.2in}
+\begin{lstlisting}[frame=single]
+	int p[2];
+	pipe(p);
+	pid = fork();
+	if (pid == 0) {
+		close (1);
+		dup(p[1]);
+		close(p[0]);
+		close(p[1]);
+		char *argv[] = {"cat", 0};
+		exec("cat", argv);
+		exit();
+	}
+\end{lstlisting}
+\end{minipage}
+\begin{minipage}[t]{2.3in}
+\begin{lstlisting}[frame=single]
+	@pid =@ fork()
+	@if (pid == 0) {
+		close(0);
+		dup(p[0]);
+		close(p[0]);
+		close(p[1]);
+		char *argv[] = {"sh", 0};
+		exec("sh", argv);
+		exit();@	
+	}
+	close(p[0]);
+	close(p[1]);
+	wait();
+	wait();
+\end{lstlisting}
+\end{minipage}
+\end{onlyenv}

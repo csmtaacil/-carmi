@@ -1,6 +1,8 @@
 ---
 layout: risc_en
+title: Carmi Merimovich, Peronal site
 ---
 
 - [Courses](courses/)
-- [Automatic questions](questions/)
+- [Some past exams](exams/)
+- [(experimental) Automatic questions](questions/)
