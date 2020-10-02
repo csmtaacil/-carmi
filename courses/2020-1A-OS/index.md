@@ -18,11 +18,14 @@ A copy can be purchased for a very modest price,
 	see the above link...
 There are several copies in the library.
 
-We will use slides developed by
-	[Moshe Sulamy.](https://www.cs.mta.ac.il/staff/Moshe/mePublished_year_en.html) 
-	
+
 Grading. 70% final exam, 30% assignments.
-The TA is [Tzvi Melamed](http://tzvimelamed.com/lab/).
+The TA was, is, and hopefully will be,
+	[Tzvi Melamed](http://tzvimelamed.com/lab/).
+
+We will use slides prepared by
+	[Moshe Sulamy:](https://www.cs.mta.ac.il/staff/Moshe/mePublished_year_en.html)
 	
-- [Introduction](01_intro.pdf)
-- [Processes](02_processes.pdf)
+	
+1. [Introduction](01_intro.pdf)
+1. [Processes](02_processes.pdf)
