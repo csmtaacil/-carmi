@@ -1,8 +1,8 @@
 //
 // c _ a b s
 //
-import {Ram} from "./Ram.mjs";
-import {DisplayRam} from "./DisplayRam.mjs";
+import {Ram} from "../Ram.mjs";
+import {DisplayRam} from "../DisplayRam.mjs";
 
 
 let ram = new Ram;

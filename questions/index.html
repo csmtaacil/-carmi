@@ -7,7 +7,7 @@ layout: risc_en
 	{% if question.name contains "_en.html"%}
 		{% if question.shortText %}
 		<li>
-		<a href="{{question.name}}">{{question.shortText}}</a>
+		<a href="{{site.baseurl}}{{question.url}}">{{question.shortText}}</a>
 		</li>
 		{% endif %}
 	{% endif %}

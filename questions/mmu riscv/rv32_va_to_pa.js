@@ -1,8 +1,8 @@
 //
 //  r  v  3  2    v a   t o   p a
 //
-import {Ram} from "./Ram.mjs";
-import {DisplayRam} from "./DisplayRam.mjs";
+import {Ram} from "../Ram.mjs";
+import {DisplayRam} from "../DisplayRam.mjs";
 
 function fillGarbage(page) {// Garbage looking as legit
 	for (let o = 0; o < 4096; o += 4) {

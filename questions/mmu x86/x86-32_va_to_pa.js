@@ -1,8 +1,8 @@
 //
 //  x 8 6   -  3 2   m m u
 //
-import {Ram} from "./Ram.mjs";
-import {DisplayRam} from "./DisplayRam.mjs";
+import {Ram} from "../Ram.mjs";
+import {DisplayRam} from "../DisplayRam.mjs";
 
 function fillGarbage(page) {// Garbage looking as legit translation page
 	for (let o = 0; o < 4096; o += 4) {
