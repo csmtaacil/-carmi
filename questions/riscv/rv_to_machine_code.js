@@ -91,7 +91,7 @@ let regs =
 function randomReg() {
 	let reg = Math.trunc(Math.random() * 32);
 	if (Math.random() < 0.5)
-		return ({str:"a" + reg, code: reg});
+		return ({str:"x" + reg, code: reg});
 	let v = regs[reg];
 	if (v.length == 1)
 		return ({str:v[0], code:reg});
