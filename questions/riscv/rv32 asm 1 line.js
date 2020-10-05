@@ -124,7 +124,7 @@ function randomImm20() {
 		Math.trunc(Math.random() * Math.pow(2,20));
 	let immc = imm;
 	if (immc < 0)
-		immc = (2**20) - immc;
+		immc = (2**20) + immc;
 	return ({str: imm.toString(10), code: immc});
 }
 
@@ -132,7 +132,7 @@ function randomImm12() {
 	let imm = -2048 + Math.trunc(Math.random() * 4096);
 	let immc = imm;
 	if (immc < 0)
-		immc = (2**12) - immc;
+		immc = (2**12) + immc;
 	return ({str: imm.toString(10), code: immc});
 }
 
@@ -150,7 +150,7 @@ function randomInstruction() {
 	case Utype:
 		rd = randomReg();
 		is = randomImm20();
-		c = v[2] + rd.code * 128 + is.code * Math.pow(2,12);
+		c = v[2] + rd.code * 128 + is.code * (2**12);
 		return({str: v[0] + "\t" + rd.str + ", " + is.str,
 						code: c, type: v[1]});
 	
@@ -166,6 +166,7 @@ function randomInstruction() {
 		rs1 = randomReg();
 		is = randomImm12();
 		c = v[2] + rd.code * 128 + v[3]*Math.pow(2,12) +
+				 + rs1.code * (2**15) +
 					is.code * Math.pow(2,20);
 		return({str: v[0] + "\t" + rd.str + ", " + 
 				 rs1.str +", " + is.str,
@@ -187,10 +188,10 @@ function randomInstruction() {
 		rs1 = randomReg();
 		rs2 = randomReg();
 		is = randomImm12();
-		c = v[2] + (is & 15) * 128 + v[3]*Math.pow(2,12) +
+		c = v[2] + (is % 16) * 128 + v[3]*Math.pow(2,12) +
 					rs1.code * Math.pow(2, 15) + 
 					rs2.code * Math.pow(2, 20) + 
-					Math.trunc(is.code / 16) * Math.pow(2,25);
+					Math.trunc(is.code / 16) * (2**25);
 		return({str: v[0] + "\t" + rs1.str + ", " + 
 				 rs2.str +", " + is.str,
 					code: c, type: v[1]});
@@ -233,6 +234,14 @@ function displayHelp() {
 	let rs1, rs2, rd, s;
 	let type = getType(ri.code);
 	switch (type) {
+	case Btype:
+		s = helpBtype(ri);
+		break;
+
+	case Itype:
+		s = helpItype(ri);
+		break;
+
 	case Utype:
 		s = helpUtype(ri);
 		break;
@@ -264,7 +273,7 @@ function helpRtype(ri) {
 	for (let i = 0; i < 2; i++) {
 
 		
-		s += "<td>Rtype</td>";
+		s += "<td></td>";
 		s += "<td>";
 		s += Math.trunc(Math.trunc(ri.code / (2**25)) % 128)
 					.toString(2).padStart(7,"0");
@@ -307,6 +316,112 @@ function helpRtype(ri) {
 	s += "</table>";
 	return(s);
 }
+
+
+function helpBtype(ri) {
+	let s = "<table>";
+	s += '<tr style="border-bottom: solid 1px black;">';
+	s += "<td>Btype</td>";
+	s += "<td></td>";
+	s += "<td>rs2</td>";
+	s += "<td>rs1</td>";
+	s += "<td></td>";
+	s += "<td>rd</td>";
+	s += "<td></td>";
+	s += "</tr>";
+	for (let i = 0; i < 2; i++) {
+
+		s += "<td></td>";
+		s += "<td>";
+		s += Math.trunc(Math.trunc(ri.code / (2**25)) % 128)
+					.toString(2).padStart(7,"0");
+		s += "</td>";
+
+		let rs2 = Math.trunc(Math.trunc(ri.code / (2**20)) % 32);
+		s += "<td>";
+		if (i == 0)
+			s += rs2.toString();
+		else
+			s += regs[rs2];
+		s += "</td>";
+		
+		let rs1 = Math.trunc(Math.trunc(ri.code / (2**15)) % 32);
+		s += "<td>";
+		if (i == 0)
+			s += rs1.toString();
+		else
+			s += regs[rs1];
+		s += "</td>";
+		
+		s += "<td>";
+		s += Math.trunc(Math.trunc(ri.code /4096 ) % 8)
+				.toString(2).padStart(3,"0");
+		s += "</td>";
+
+		let v = Math.trunc(Math.trunc(ri.code / 128) % 32);
+		s += "<td>";
+		s += v.toString(2).padStart(5,"0");
+		s += "</td>";
+		
+		s += "<td>";
+		s += Math.trunc(ri.code % 128).toString(2).padStart(7,"0");
+		s += "</td>";
+		s += "</tr>";
+	}
+	s += "</table>";
+	return(s);
+}
+
+function helpItype(ri) {
+	let s = "<table>";
+	s += '<tr style="border-bottom: solid 1px black;">';
+	s += "<td>Itype</td>";
+	s += "<td></td>";
+	s += "<td>rs1</td>";
+	s += "<td></td>";
+	s += "<td>rd</td>";
+	s += "<td></td>";
+	s += "</tr>";
+	for (let i = 0; i < 2; i++) {
+
+		s += "<td></td>";
+		s += "<td>";
+		let v = Math.trunc(Math.trunc(ri.code / (2**20)) % 4096)
+		if (v >= 2048)
+			v -= 4096;
+		s += v.toString(10);
+		s += "</td>";
+
+		let rs1 = Math.trunc(Math.trunc(ri.code / (2**15)) % 32);
+		s += "<td>";
+		if (i == 0)
+			s += rs1.toString();
+		else
+			s += regs[rs1];
+		s += "</td>";
+		
+		s += "<td>";
+		s += Math.trunc(Math.trunc(ri.code /4096 ) % 8)
+				.toString(2).padStart(3,"0");
+		s += "</td>";
+
+		let rd = Math.trunc(Math.trunc(ri.code / 128) % 32);
+		s += "<td>";
+		if (i == 0)
+			s += "x" + rd.toString(10);
+		else
+			s += regs[rd];
+		s += "</td>";
+		
+		s += "<td>";
+		s += Math.trunc(ri.code % 128).toString(2).padStart(7,"0");
+		s += "</td>";
+		s += "</tr>";
+	}
+	s += "</table>";
+	return(s);
+}
+
 
 function helpUtype(ri) {
 	let s = "<table>";
