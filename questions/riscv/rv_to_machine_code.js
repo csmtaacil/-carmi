@@ -21,7 +21,7 @@ let opCodes = [
 ["bne",   Btype,  0b1100011,  0b001],
 ["blt",   Btype,  0b1100011,  0b100],
 ["bgeq",  Btype,  0b1100011,  0b101],
-["bltu",  Btype,  0b1100011,  0b101],
+["bltu",  Btype,  0b1100011,  0b110],
 ["bgeu",  Btype,  0b1100011,  0b111],
 
 ["lb",    Itype,  0b0000011,  0b000],
@@ -41,7 +41,7 @@ let opCodes = [
 ["slri",  I2type, 0b0010011,  0b101, 0b0000000],
 ["srai",  I2type, 0b0010011,  0b101, 0b0100000],
 
-["add",    Rtype,  0b0110011,  0b000, 0b0000000],
+["add",   Rtype,  0b0110011,  0b000, 0b0000000],
 ["sub",   Rtype,  0b0110011,  0b000, 0b0100000],
 ["sll",   Rtype,  0b0110011,  0b001, 0b0000000],
 ["slt",   Rtype,  0b0110011,  0b010, 0b0000000],
@@ -88,6 +88,25 @@ let regs =
   ["t6"]
 ];
 
+function getType(op) {
+	let p = [];
+	p[0] = Math.trunc(op % 128);
+	p[1] = Math.trunc(Math.trunc(op / 4096) % 8);
+	p[2] = Math.trunc(Math.trunc(op / (2**25))% 128);
+
+	for (let i = 0; i < opCodes.length; i++) {
+		let v = opCodes[i];
+		let j;
+		for (j = 2; j < v.length; j++) {
+			if (p[j-2] != v[j])
+				break;
+		}
+		if (j == v.length)
+			return (v[1]);
+	}
+	return (0);
+}
+
 function randomReg() {
 	let reg = Math.trunc(Math.random() * 32);
 	if (Math.random() < 0.5)
@@ -101,14 +120,20 @@ function randomReg() {
 }
 
 function randomImm20() {
-	let imm = -Math.pow(2,19) + 
+	let imm = (-(2**19)) + 
 		Math.trunc(Math.random() * Math.pow(2,20));
-	return ({str: imm.toString(10), code: imm});
+	let immc = imm;
+	if (immc < 0)
+		immc = (2**20) - immc;
+	return ({str: imm.toString(10), code: immc});
 }
 
 function randomImm12() {
 	let imm = -2048 + Math.trunc(Math.random() * 4096);
-	return ({str: imm.toString(10), code: imm});
+	let immc = imm;
+	if (immc < 0)
+		immc = (2**12) - immc;
+	return ({str: imm.toString(10), code: immc});
 }
 
 function randomImm5() {
@@ -206,7 +231,8 @@ function displayAnswer() {
 function displayHelp() {
 	let eHelp = document.getElementById("help");
 	let rs1, rs2, rd, s;
-	switch (ri.type) {
+	let type = getType(ri.code);
+	switch (type) {
 	case Utype:
 		s = helpUtype(ri);
 		break;
@@ -217,7 +243,7 @@ function displayHelp() {
 		
 	default:
 		s = "<table><tr><td>";
-		s += iType[ri.type];
+		s += iType[type];
 		s += "</td></tr>";
 		s += "</table>";
 	}
@@ -291,10 +317,12 @@ function helpUtype(ri) {
 	s += "<td></td>";
 	s += "</tr>";
 	for (let i = 0; i < 2; i++) {
-		s += "<td>Rtype</td>";
+		s += "<td></td>";
 		s += "<td>";
-		s += Math.trunc(Math.trunc(ri.code / 4096) % (2**20))
-					.toString(10);
+		let v = Math.trunc(Math.trunc(ri.code / 4096) % (2**20));
+		if (v >= (2**19))
+			v = v - (2**20);
+		s += v.toString(10);
 		s += "</td>";
 
 		let rd = Math.trunc(Math.trunc(ri.code / (2**7)) % 32);
