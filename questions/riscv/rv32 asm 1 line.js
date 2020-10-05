@@ -1,92 +1,17 @@
 //
-// r v   t o   m a c h i n e   c o d e
+// r v 3 2    A s s e m b l e   o n e   l i n e
 //
-const Utype  = 1;
-const Jtype  = 2;
-const Itype  = 3;
-const Btype  = 4;
-const I2type = 5;
-const Rtype  = 6;
+
+import {opCodes, regs, Utype, Itype,Btype,Rtype,Jtype,I2type} from "./riscv32_isa.js";
+
+import {helpUtype} from "./helpUtype.js";
+import {helpItype} from "./helpItype.js";
+import {helpBtype} from "./helpBtype.js";
+import {helpRtype} from "./helpRtype.js";
 
 let iType = ["", "Utype", "Jtype", "Itype", "Btype",
              "I2type", "Rtype"];
 
-let opCodes = [
-["lui",   Utype,  0b0110111],
-["auipc", Utype,  0b0010111],
-["jal",   Jtype,  0b1101111],
-["jalr",  Itype,  0b1100111, 0b000],
-
-["beq",   Btype,  0b1100011,  0b000],
-["bne",   Btype,  0b1100011,  0b001],
-["blt",   Btype,  0b1100011,  0b100],
-["bgeq",  Btype,  0b1100011,  0b101],
-["bltu",  Btype,  0b1100011,  0b110],
-["bgeu",  Btype,  0b1100011,  0b111],
-
-["lb",    Itype,  0b0000011,  0b000],
-["lh",    Itype,  0b0000011,  0b001],
-["lw",    Itype,  0b0000011,  0b100],
-["lbu",   Itype,  0b0000011,  0b101],
-["lhu",   Itype,  0b0000011,  0b110],
-
-["addi",  Itype,  0b0010011,  0b000],
-["slti",  Itype,  0b0010011,  0b010],
-["sltiu", Itype,  0b0010011,  0b011],
-["xori",  Itype,  0b0010011,  0b100],
-["ori",   Itype,  0b0010011,  0b110],
-["andi",  Itype,  0b0010011,  0b111],
-
-["slli",  I2type, 0b0010011,  0b001, 0b0000000],
-["slri",  I2type, 0b0010011,  0b101, 0b0000000],
-["srai",  I2type, 0b0010011,  0b101, 0b0100000],
-
-["add",   Rtype,  0b0110011,  0b000, 0b0000000],
-["sub",   Rtype,  0b0110011,  0b000, 0b0100000],
-["sll",   Rtype,  0b0110011,  0b001, 0b0000000],
-["slt",   Rtype,  0b0110011,  0b010, 0b0000000],
-["sltu",  Rtype,  0b0110011,  0b011, 0b0000000],
-["xor",   Rtype,  0b0110011,  0b100, 0b0000000],
-["srl",   Rtype,  0b0110011,  0b101, 0b0000000],
-["sra",   Rtype,  0b0110011,  0b101, 0b0100000],
-["or",    Rtype,  0b0110011,  0b110, 0b0000000],
-["and",   Rtype,  0b0110011,  0b111, 0b0000000],
-];
-
-let regs = 
-[ ["zero"],
-  ["ra"],
-  ["sa"],
-  ["gp"],
-  ["tp"],
-  ["t0"],
-  ["t1"],
-  ["t2"],
-  ["s0", "fp"],
-  ["s1"],
-  ["a0"],
-  ["a1"],
-  ["a2"],
-  ["a3"],
-  ["a4"],
-  ["a5"],
-  ["a6"],
-  ["a7"],
-  ["s2"],
-  ["s3"],
-  ["s4"],
-  ["s5"],
-  ["s6"],
-  ["s7"],
-  ["s8"],
-  ["s9"],
-  ["s10"],
-  ["s11"],
-  ["t3"],
-  ["t4"],
-  ["t5"],
-  ["t6"]
-];
 
 function getType(op) {
 	let p = [];
@@ -259,206 +184,16 @@ function displayHelp() {
 	eHelp.innerHTML = s;
 }
 
-function helpRtype(ri) {
-	let s = "<table>";
-	s += '<tr style="border-bottom: solid 1px black;">';
-	s += "<td>Rtype</td>";
-	s += "<td></td>";
-	s += "<td>rs2</td>";
-	s += "<td>rs1</td>";
-	s += "<td></td>";
-	s += "<td>rd</td>";
-	s += "<td></td>";
-	s += "</tr>";
-	for (let i = 0; i < 2; i++) {
-
-		
-		s += "<td></td>";
-		s += "<td>";
-		s += Math.trunc(Math.trunc(ri.code / (2**25)) % 128)
-					.toString(2).padStart(7,"0");
-		s += "</td>";
-
-		let rs2 = Math.trunc(Math.trunc(ri.code / (2**20)) % 32);
-		s += "<td>";
-		if (i == 0)
-			s += rs2.toString();
-		else
-			s += regs[rs2];
-		s += "</td>";
-		
-		let rs1 = Math.trunc(Math.trunc(ri.code / (2**15)) % 32);
-		s += "<td>";
-		if (i == 0)
-			s += rs1.toString();
-		else
-			s += regs[rs1];
-		s += "</td>";
-		
-		s += "<td>";
-		s += Math.trunc(Math.trunc(ri.code /4096 ) % 8)
-				.toString(2).padStart(3,"0");
-		s += "</td>";
-
-		let rd = Math.trunc(Math.trunc(ri.code / (2**7)) % 32);
-		s += "<td>";
-		if (i == 0)
-			s += rd.toString();
-		else
-			s += regs[rd];
-		s += "</td>";
-		
-		s += "<td>";
-		s += Math.trunc(ri.code % 128).toString(2).padStart(7,"0");
-		s += "</td>";
-		s += "</tr>";
-	}
-	s += "</table>";
-	return(s);
-}
 
 
-function helpBtype(ri) {
-	let s = "<table>";
-	s += '<tr style="border-bottom: solid 1px black;">';
-	s += "<td>Btype</td>";
-	s += "<td></td>";
-	s += "<td>rs2</td>";
-	s += "<td>rs1</td>";
-	s += "<td></td>";
-	s += "<td>rd</td>";
-	s += "<td></td>";
-	s += "</tr>";
-	for (let i = 0; i < 2; i++) {
-
-		s += "<td></td>";
-		s += "<td>";
-		s += Math.trunc(Math.trunc(ri.code / (2**25)) % 128)
-					.toString(2).padStart(7,"0");
-		s += "</td>";
-
-		let rs2 = Math.trunc(Math.trunc(ri.code / (2**20)) % 32);
-		s += "<td>";
-		if (i == 0)
-			s += rs2.toString();
-		else
-			s += regs[rs2];
-		s += "</td>";
-		
-		let rs1 = Math.trunc(Math.trunc(ri.code / (2**15)) % 32);
-		s += "<td>";
-		if (i == 0)
-			s += rs1.toString();
-		else
-			s += regs[rs1];
-		s += "</td>";
-		
-		s += "<td>";
-		s += Math.trunc(Math.trunc(ri.code /4096 ) % 8)
-				.toString(2).padStart(3,"0");
-		s += "</td>";
-
-		let v = Math.trunc(Math.trunc(ri.code / 128) % 32);
-		s += "<td>";
-		s += v.toString(2).padStart(5,"0");
-		s += "</td>";
-		
-		s += "<td>";
-		s += Math.trunc(ri.code % 128).toString(2).padStart(7,"0");
-		s += "</td>";
-		s += "</tr>";
-	}
-	s += "</table>";
-	return(s);
-}
-
-function helpItype(ri) {
-	let s = "<table>";
-	s += '<tr style="border-bottom: solid 1px black;">';
-	s += "<td>Itype</td>";
-	s += "<td></td>";
-	s += "<td>rs1</td>";
-	s += "<td></td>";
-	s += "<td>rd</td>";
-	s += "<td></td>";
-	s += "</tr>";
-	for (let i = 0; i < 2; i++) {
-
-		s += "<td></td>";
-		s += "<td>";
-		let v = Math.trunc(Math.trunc(ri.code / (2**20)) % 4096)
-		if (v >= 2048)
-			v -= 4096;
-		s += v.toString(10);
-		s += "</td>";
-
-		let rs1 = Math.trunc(Math.trunc(ri.code / (2**15)) % 32);
-		s += "<td>";
-		if (i == 0)
-			s += rs1.toString();
-		else
-			s += regs[rs1];
-		s += "</td>";
-		
-		s += "<td>";
-		s += Math.trunc(Math.trunc(ri.code /4096 ) % 8)
-				.toString(2).padStart(3,"0");
-		s += "</td>";
-
-		let rd = Math.trunc(Math.trunc(ri.code / 128) % 32);
-		s += "<td>";
-		if (i == 0)
-			s += "x" + rd.toString(10);
-		else
-			s += regs[rd];
-		s += "</td>";
-		
-		s += "<td>";
-		s += Math.trunc(ri.code % 128).toString(2).padStart(7,"0");
-		s += "</td>";
-		s += "</tr>";
-	}
-	s += "</table>";
-	return(s);
-}
 
 
-function helpUtype(ri) {
-	let s = "<table>";
-	s += '<tr style="border-bottom: solid 1px black;">';
-	s += "<td>Utype</td>";
-	s += "<td></td>";
-	s += "<td>rd</td>";
-	s += "<td></td>";
-	s += "</tr>";
-	for (let i = 0; i < 2; i++) {
-		s += "<td></td>";
-		s += "<td>";
-		let v = Math.trunc(Math.trunc(ri.code / 4096) % (2**20));
-		if (v >= (2**19))
-			v = v - (2**20);
-		s += v.toString(10);
-		s += "</td>";
 
-		let rd = Math.trunc(Math.trunc(ri.code / (2**7)) % 32);
-		s += "<td>";
-		if (i == 0)
-			s += rd.toString();
-		else
-			s += regs[rd];
-		s += "</td>";
-		
-		s += "<td>";
-		s += Math.trunc(ri.code % 128).toString(2).padStart(7,"0");
-		s += "</td>";
-		s += "</tr>";
-	}
-	s += "</table>";
-	return(s);
-}
 
 let helpMode = false;
 
+
+setHelpMode();  // Debug
 
 function setHelpMode() {
 	helpMode = !helpMode;
