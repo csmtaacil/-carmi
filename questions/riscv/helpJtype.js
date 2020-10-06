@@ -1,9 +1,9 @@
 import {regs} from "./riscv32_isa.js"
 
-export function helpUtype(ri) {
+export function helpJtype(ri) {
 	let s = "<table>";
 	s += '<tr style="border-bottom: solid 1px black;">';
-	s += "<td>Utype</td>";
+	s += "<td>Jtype</td>";
 	s += "<td>imm</td>";
 	s += "<td>rd</td>";
 	s += "<td>op1</td>";

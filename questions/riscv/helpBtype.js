@@ -4,12 +4,12 @@ export function helpBtype(ri) {
 	let s = "<table>";
 	s += '<tr style="border-bottom: solid 1px black;">';
 	s += "<td>Btype</td>";
-	s += "<td></td>";
+	s += "<td>Imm</td>";
 	s += "<td>rs2</td>";
 	s += "<td>rs1</td>";
-	s += "<td></td>";
-	s += "<td>rd</td>";
-	s += "<td></td>";
+	s += "<td>op2</td>";
+	s += "<td>Imm</td>";
+	s += "<td>op1</td>";
 	s += "</tr>";
 	for (let i = 0; i < 2; i++) {
 
@@ -22,7 +22,7 @@ export function helpBtype(ri) {
 		let rs2 = Math.trunc(Math.trunc(ri.code / (2**20)) % 32);
 		s += "<td>";
 		if (i == 0)
-			s += rs2.toString();
+			s += "x"+rs2.toString();
 		else
 			s += regs[rs2];
 		s += "</td>";
@@ -30,7 +30,7 @@ export function helpBtype(ri) {
 		let rs1 = Math.trunc(Math.trunc(ri.code / (2**15)) % 32);
 		s += "<td>";
 		if (i == 0)
-			s += rs1.toString();
+			s += "x"+rs1.toString();
 		else
 			s += regs[rs1];
 		s += "</td>";
@@ -40,9 +40,9 @@ export function helpBtype(ri) {
 				.toString(2).padStart(3,"0");
 		s += "</td>";
 
-		let v = Math.trunc(Math.trunc(ri.code / 128) % 32);
+		let v = Math.trunc(Math.trunc(ri.code / 128) % 16);
 		s += "<td>";
-		s += v.toString(2).padStart(5,"0");
+		s += v.toString(2).padStart(4,"0");
 		s += "</td>";
 		
 		s += "<td>";

@@ -1,9 +1,10 @@
-export const Utype  = 1;
-export const Jtype  = 2;
-export const Itype  = 3;
-export const Btype  = 4;
-export const I2type = 5;
-export const Rtype  = 6;
+export const Btype  = 1;
+export const Itype  = 2;
+export const I2type = 3;
+export const Jtype  = 4;
+export const Rtype  = 5;
+export const Utype  = 6;
+export const Stype  = 7;
 
 let opCodes = [
 ["lui",   Utype,  0b0110111],
@@ -23,6 +24,10 @@ let opCodes = [
 ["lw",    Itype,  0b0000011,  0b100],
 ["lbu",   Itype,  0b0000011,  0b101],
 ["lhu",   Itype,  0b0000011,  0b110],
+
+["sb",    Stype,  0b0100011,  0b000],
+["sh",    Stype,  0b0100011,  0b001],
+["sw",    Stype,  0b0100011,  0b010],
 
 ["addi",  Itype,  0b0010011,  0b000],
 ["slti",  Itype,  0b0010011,  0b010],
