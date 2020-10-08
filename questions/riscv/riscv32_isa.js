@@ -7,6 +7,9 @@ export const Utype  = 6;
 export const Stype  = 7;
 
 let opCodes = [
+//
+// RV32I  begining
+//
 ["lui",   Utype,  0b0110111],
 ["auipc", Utype,  0b0010111],
 ["jal",   Jtype,  0b1101111],
@@ -50,6 +53,23 @@ let opCodes = [
 ["sra",   Rtype,  0b0110011,  0b101, 0b0100000],
 ["or",    Rtype,  0b0110011,  0b110, 0b0000000],
 ["and",   Rtype,  0b0110011,  0b111, 0b0000000],
+//
+// RV32I end
+//
+//
+// RV32M begin
+//
+["mul",    Rtype,  0b0110011,  0b000, 0b0000001],
+["mulh",   Rtype,  0b0110011,  0b001, 0b0000001],
+["mulhsu", Rtype,  0b0110011,  0b010, 0b0000001],
+["mulhu",  Rtype,  0b0110011,  0b011, 0b0000001],
+["div",    Rtype,  0b0110011,  0b100, 0b0000001],
+["divu",   Rtype,  0b0110011,  0b101, 0b0000001],
+["rem",    Rtype,  0b0110011,  0b110, 0b0000001],
+["remu",   Rtype,  0b0110011,  0b111, 0b0000001],
+//
+// RV32M end
+//
 ];
 
 let regs = 
