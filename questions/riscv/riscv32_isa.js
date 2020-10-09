@@ -1,10 +1,11 @@
 export const Btype  = 1;
 export const Itype  = 2;
 export const I2type = 3;
-export const Jtype  = 4;
-export const Rtype  = 5;
-export const Utype  = 6;
-export const Stype  = 7;
+export const I3type = 4;
+export const Jtype  = 5;
+export const Rtype  = 6;
+export const Utype  = 7;
+export const Stype  = 8;
 
 let opCodes = [
 //
@@ -22,11 +23,11 @@ let opCodes = [
 ["bltu",  Btype,  0b1100011,  0b110],
 ["bgeu",  Btype,  0b1100011,  0b111],
 
-["lb",    Itype,  0b0000011,  0b000],
-["lh",    Itype,  0b0000011,  0b001],
-["lw",    Itype,  0b0000011,  0b100],
-["lbu",   Itype,  0b0000011,  0b101],
-["lhu",   Itype,  0b0000011,  0b110],
+["lb",    I3type,  0b0000011,  0b000],
+["lh",    I3type,  0b0000011,  0b001],
+["lw",    I3type,  0b0000011,  0b100],
+["lbu",   I3type,  0b0000011,  0b101],
+["lhu",   I3type,  0b0000011,  0b110],
 
 ["sb",    Stype,  0b0100011,  0b000],
 ["sh",    Stype,  0b0100011,  0b001],
