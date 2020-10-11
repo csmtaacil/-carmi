@@ -1,23 +1,25 @@
 ---
 layout: risc_en
-shortText: (riscv32) Disassembly (one liner)
+shortText: (riscv32) The human dis-assembler (one liner)
 ---
 <script src="./rv32 disasm 1 line.js" type="module">
 </script>
 
 <p>
-Write the riscv assembly instruction
-	equivalent to the following machine code
-		instruction
+Write the assembly instruction
+	equivalent to the following riscv machine code
+		instruction:
 </p>
-<p dir="ltr" id="instruction">
+<p dir="ltr" id="instructionQuestion">
 </p>
 <p>
-<button id="answerButton">Answer</button>
+<input type="text" id="humanAnswer">
+<button id="checkHumanAnswer">Check answer</button>
+</p>
+<p>
+<button id="showAnswer">Show Answer</button>
 </p>
 <p dir="ltr">
-<span id="answer"></span>
+<span id="machineAnswer"></span>
 </p>
-<div dir="ltr" id="help">
-</div>
 

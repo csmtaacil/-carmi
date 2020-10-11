@@ -1,12 +1,14 @@
-import {opCodes, regs, Utype, Itype,Btype,Rtype,Jtype,I2type, Stype} from "./riscv32_isa.js";
+import {opCodes, regs, Utype, Itype, Btype, Rtype, Jtype,
+			I2type, I3type, Stype} from "./riscv32_isa.js";
 
-import {helpBtype}  from "./helpBtype.js";
-import {helpItype}  from "./helpItype.js";
-import {helpI2type} from "./helpI2type.js";
-import {helpJtype}  from "./helpJtype.js";
-import {helpRtype}  from "./helpRtype.js";
-import {helpUtype}  from "./helpUtype.js";
-import {helpStype}  from "./helpStype.js";
+import {displayHelpBtype}  from "./displayHelpBtype.js";
+import {displayHelpItype}  from "./displayHelpItype.js";
+import {displayHelpI2type} from "./displayHelpI2type.js";
+import {displayHelpI3type} from "./displayHelpI3type.js";
+import {displayHelpJtype}  from "./displayHelpJtype.js";
+import {displayHelpRtype}  from "./displayHelpRtype.js";
+import {displayHelpUtype}  from "./displayHelpUtype.js";
+import {displayHelpStype}  from "./displayHelpStype.js";
 
 let iType = [];
 
@@ -24,9 +26,6 @@ function getType(op) {
 	p[0] = Math.trunc(op % 128);
 	p[1] = Math.trunc(Math.trunc(op / 4096) % 8);
 	p[2] = Math.trunc(Math.trunc(op / (2**25)) % 128);
-	//console.log(op.toString(16).padStart(8,"0"),
-	//			p[0].toString(2).padStart(7,"0"),
-	//			p[1].toString(2).padStart(3,"0"));
 	for (let i = 0; i < opCodes.length; i++) {
 		let v = opCodes[i];
 		let j;
@@ -42,36 +41,39 @@ function getType(op) {
 
 
 export function displayHelp(ri) {
-	let eHelp = document.getElementById("help");
-	let rs1, rs2, rd, s;
 	let type = getType(ri.code);
+	let s;
 	switch (type) {
 	case Btype:
-		s = helpBtype(ri);
+		s = displayHelpBtype(ri);
 		break;
 
 	case Itype:
-		s = helpItype(ri);
+		s = displayHelpItype(ri);
 		break;
 
 	case I2type:
-		s = helpI2type(ri);
+		s = displayHelpI2type(ri);
+		break;
+
+	case I3type:
+		s = displayHelpI3type(ri);
 		break;
 
 	case Jtype:
-		s = helpJtype(ri);
+		s = displayHelpJtype(ri);
 		break;
 
 	case Utype:
-		s = helpUtype(ri);
+		s = displayHelpUtype(ri);
 		break;
 	
 	case Rtype:
-		s = helpRtype(ri);
+		s = displayHelpRtype(ri);
 		break;
 		
 	case Stype:
-		s = helpStype(ri);
+		s = displayHelpStype(ri);
 		break;
 		
 	default:
@@ -80,5 +82,7 @@ export function displayHelp(ri) {
 		s += "</td></tr>";
 		s += "</table>";
 	}
+
+	let eHelp = document.getElementById("helpMachineText");
 	eHelp.innerHTML = s;
 }

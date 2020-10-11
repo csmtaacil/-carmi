@@ -1,6 +1,6 @@
 import {regNum} from "./regNum.js";
 
-export function disasmRtype(mnem, str) {
+export function asmItype(mnem, str) {
 	let s = str.trim();
 	let i;
 	
@@ -27,10 +27,10 @@ export function disasmRtype(mnem, str) {
 		return undefined;
 
 	
-	regStr = s;
-	let rs2 = regNum(regStr);
-	if (rs2 == undefined)
+	let offStr = s;
+	let offInt = parseInt(offStr);
+	if (offInt == undefined)
 		return undefined;
 	
-	return (mnem + "\t" + rd + "," + rs1 + "," + rs2);
+	return (mnem + "\t" + rd + "," + rs1 + "," + offStr);
 }

@@ -1,11 +1,10 @@
 import {regs} from "./riscv32_isa.js"
 
-export function helpI2type(ri) {
+export function displayHelpItype(ri) {
 	let s = "<table>";
 	s += '<tr style="border-bottom: solid 1px black;">';
-	s += "<td>I2type</td>";
-	s += "<td>op3</td>";
-	s += "<td>shamnt</td>";
+	s += "<td>Itype</td>";
+	s += "<td>imm</td>";
 	s += "<td>rs1</td>";
 	s += "<td>op2</td>";
 	s += "<td>rd</td>";
@@ -15,13 +14,10 @@ export function helpI2type(ri) {
 	for (let i = 0; i < 2; i++) {
 		s += "<td></td>";
 		s += "<td>";
-		let v = Math.trunc(Math.trunc(ri.code / (2**25)) % 128)
-		s += v.toString(2).padStart(7);
-		s += "</td>";
-
-		s += "<td>";
-		let shamnt = Math.trunc(Math.trunc(ri.code / (2**20)) % 32)
-		s += shamnt.toString(10);
+		let v = Math.trunc(Math.trunc(ri.code / (2**20)) % 4096)
+		if (v >= 2048)
+			v -= 4096;
+		s += v.toString(10);
 		s += "</td>";
 
 		let rs1 = Math.trunc(Math.trunc(ri.code / (2**15)) % 32);

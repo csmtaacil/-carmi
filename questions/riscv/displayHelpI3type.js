@@ -1,32 +1,25 @@
 import {regs} from "./riscv32_isa.js"
 
-export function helpBtype(ri) {
+export function displayHelpI3type(ri) {
 	let s = "<table>";
 	s += '<tr style="border-bottom: solid 1px black;">';
-	s += "<td>Btype</td>";
-	s += "<td>Imm</td>";
-	s += "<td>rs2</td>";
+	s += "<td>Itype</td>";
+	s += "<td>imm</td>";
 	s += "<td>rs1</td>";
 	s += "<td>op2</td>";
-	s += "<td>Imm</td>";
+	s += "<td>rd</td>";
 	s += "<td>op1</td>";
 	s += "</tr>";
-	for (let i = 0; i < 2; i++) {
 
+	for (let i = 0; i < 2; i++) {
 		s += "<td></td>";
 		s += "<td>";
-		s += Math.trunc(Math.trunc(ri.code / (2**25)) % 128)
-					.toString(2).padStart(7,"0");
+		let v = Math.trunc(Math.trunc(ri.code / (2**20)) % 4096)
+		if (v >= 2048)
+			v -= 4096;
+		s += v.toString(10);
 		s += "</td>";
 
-		let rs2 = Math.trunc(Math.trunc(ri.code / (2**20)) % 32);
-		s += "<td>";
-		if (i == 0)
-			s += "x"+rs2.toString();
-		else
-			s += regs[rs2];
-		s += "</td>";
-		
 		let rs1 = Math.trunc(Math.trunc(ri.code / (2**15)) % 32);
 		s += "<td>";
 		if (i == 0)
@@ -40,9 +33,12 @@ export function helpBtype(ri) {
 				.toString(2).padStart(3,"0");
 		s += "</td>";
 
-		let v = Math.trunc(Math.trunc(ri.code / 128) % 16);
+		let rd = Math.trunc(Math.trunc(ri.code / 128) % 32);
 		s += "<td>";
-		s += v.toString(2).padStart(4,"0");
+		if (i == 0)
+			s += "x" + rd.toString(10);
+		else
+			s += regs[rd];
 		s += "</td>";
 		
 		s += "<td>";

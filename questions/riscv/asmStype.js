@@ -1,6 +1,6 @@
 import {regNum} from "./regNum.js";
 
-export function disasmStype(mnem, str) {
+export function asmStype(mnem, str) {
 	let s = str.trim();
 	let i;
 

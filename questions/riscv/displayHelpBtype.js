@@ -1,19 +1,18 @@
 import {regs} from "./riscv32_isa.js"
 
-export function helpRtype(ri) {
+export function displayHelpBtype(ri) {
 	let s = "<table>";
 	s += '<tr style="border-bottom: solid 1px black;">';
-	s += "<td>Rtype</td>";
-	s += "<td>op3</td>";
+	s += "<td>Btype</td>";
+	s += "<td>Imm</td>";
 	s += "<td>rs2</td>";
 	s += "<td>rs1</td>";
 	s += "<td>op2</td>";
-	s += "<td>rd</td>";
+	s += "<td>Imm</td>";
 	s += "<td>op1</td>";
 	s += "</tr>";
 	for (let i = 0; i < 2; i++) {
 
-		
 		s += "<td></td>";
 		s += "<td>";
 		s += Math.trunc(Math.trunc(ri.code / (2**25)) % 128)
@@ -41,12 +40,9 @@ export function helpRtype(ri) {
 				.toString(2).padStart(3,"0");
 		s += "</td>";
 
-		let rd = Math.trunc(Math.trunc(ri.code / (2**7)) % 32);
+		let v = Math.trunc(Math.trunc(ri.code / 128) % 16);
 		s += "<td>";
-		if (i == 0)
-			s += "x"+rd.toString();
-		else
-			s += regs[rd];
+		s += v.toString(2).padStart(4,"0");
 		s += "</td>";
 		
 		s += "<td>";

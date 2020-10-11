@@ -1,6 +1,6 @@
 import {regs} from "./riscv32_isa.js"
 
-export function helpJtype(ri) {
+export function displayHelpJtype(ri) {
 	let s = "<table>";
 	s += '<tr style="border-bottom: solid 1px black;">';
 	s += "<td>Jtype</td>";

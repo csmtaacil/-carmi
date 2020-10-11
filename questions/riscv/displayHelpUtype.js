@@ -1,6 +1,6 @@
 import {regs} from "./riscv32_isa.js"
 
-export function helpUtype(ri) {
+export function displayHelpUtype(ri) {
 	let s = "<table>";
 	s += '<tr style="border-bottom: solid 1px black;">';
 	s += "<td>Utype</td>";

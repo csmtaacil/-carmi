@@ -1,9 +1,9 @@
 import {regNum} from "./regNum.js";
 
-export function disasmItype(mnem, str) {
+export function asmBtype(mnem, str) {
 	let s = str.trim();
 	let i;
-	
+
 	for (i = 0; i < s.length; i++)
 		if (s.charAt(i) == ",")
 			break;
@@ -11,8 +11,8 @@ export function disasmItype(mnem, str) {
 		return undefined;
 	let regStr = s.substring(0,i);
 	s = s.substring(i+1, s.length);
-	let rd = regNum(regStr);
-	if (rd == undefined)
+	let rs1 = regNum(regStr);
+	if (rs1 == undefined)
 		return undefined;
 	
 	for (i = 0; i < s.length; i++)
@@ -22,15 +22,15 @@ export function disasmItype(mnem, str) {
 		return undefined;
 	regStr = s.substring(0,i);
 	s = s.substring(i+1, s.length);
-	let rs1 = regNum(regStr);
-	if (rs1 == undefined)
-		return undefined;
+	let rs2 = regNum(regStr);
+	if (rs2 == undefined)
+		return undefined;	
 
-	
-	let offStr = s;
-	let offInt = parseInt(offStr);
+
+	let offInt = parseInt(s);
 	if (offInt == undefined)
 		return undefined;
-	
-	return (mnem + "\t" + rd + "," + rs1 + "," + offStr);
+
+
+	return (mnem + "\t" + rs1 + "," +  rs2 + "," + offInt);
 }
