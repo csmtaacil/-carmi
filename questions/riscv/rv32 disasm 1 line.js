@@ -44,6 +44,6 @@ let helpMode = false;
 let eAnswerButton = document.getElementById("showAnswer");
 eAnswerButton.addEventListener("click", showMachineAnswer); 
 
-let eCheckAnswerButton = document.getElementById("checkHumanAnswer");
-eCheckAnswerButton.addEventListener("click", checkHumanAnswer); 
+let eCheckAnswer = document.getElementById("checkHumanAnswer");
+eCheckAnswerButton.addEventListener("click", checkAnswer); 
 

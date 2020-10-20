@@ -28,4 +28,9 @@ We will use slides prepared by
 
 	
 1. [Introduction](01_intro.pdf)
+		([cpu.c](./01/cpu.c), 
+		 [mem.c](./01/mem.c),
+		 [threads.c](./01/threads.c),
+		 [io.c](./01/io.c))
+
 1. [Processes](02_processes.pdf)

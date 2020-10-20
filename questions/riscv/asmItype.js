@@ -31,6 +31,16 @@ export function asmItype(mnem, str) {
 	let offInt = parseInt(offStr);
 	if (offInt == undefined)
 		return undefined;
+
+	if (offInt < 0) offInt += 2**12;
 	
-	return (mnem + "\t" + rd + "," + rs1 + "," + offStr);
+	let ih = Math.trunc(offInt / 32) % 128;
+	let il = Math.trunc(offInt % 32);
+		
+	let c = il * (2**7) +
+			rs1 * (2**15) + 
+			rs2 * (2**20) + 
+			ih * (2**25);
+
+	return (c);
 }

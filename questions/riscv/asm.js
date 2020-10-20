@@ -30,18 +30,18 @@ export function asm(str) {
 	switch (v[1]) {
 
 	case Btype:
-		return asmBtype(mnem, s);
+		return asmBtype(s);
 
 	case Itype:
-		return asmItype(mnem, s);
+		return asmItype(s);
 
 	case Rtype:
-		return asmRtype(mnem, s);
+		return asmRtype(s);
 		
 	case Stype:
-		return asmStype(mnem, s);
+		return asmStype(s);
 
 	default:
-		return (mnem);
+		return (undefined);
 	}
 }
