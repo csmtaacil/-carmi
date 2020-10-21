@@ -27,10 +27,15 @@ We will use slides prepared by
 	[Moshe Sulamy:](https://www.cs.mta.ac.il/staff/Moshe/mePublished_year_en.html)
 
 	
-1. [Introduction](01_intro.pdf)
+1. [Introduction part 1](01_intro_p1.pdf)
 		([cpu.c](./01/cpu.c), 
 		 [mem.c](./01/mem.c),
-		 [threads.c](./01/threads.c),
+		 [aslr0](./01/aslr0),
+		 [aslr1](./01/aslr1))
+
+1. [Introduction part 2](01_intro_p2.pdf)
+		 ([threads.c](./01/threads.c),
 		 [io.c](./01/io.c))
+
 
 1. [Processes](02_processes.pdf)
