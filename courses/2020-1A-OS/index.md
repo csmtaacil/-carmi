@@ -39,3 +39,9 @@ We will use slides prepared by
 
 
 1. [Processes](02_processes.pdf)
+		([fork.c](./02/fork.c),
+		 [peculiar1.c](./02/peculiar1.c),
+		 [peculiar2.c](./02/peculiar2.c),
+		 [signal1.c](./02/signal1.c),
+		 [signal2.c](./02/signal2.c),
+		 [exec.c](./02/exec.c))
