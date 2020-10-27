@@ -48,3 +48,5 @@ We will use slides prepared by
 		 [signal1.c](./02/signal1.c),
 		 [signal2.c](./02/signal2.c),
 		 [exec.c](./02/exec.c))
+
+1. [Limited direct execution](03_limited direct execution.pdf)
