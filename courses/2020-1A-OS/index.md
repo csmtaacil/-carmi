@@ -42,6 +42,9 @@ We will use slides prepared by
 		([fork.c](./02/fork.c),
 		 [peculiar1.c](./02/peculiar1.c),
 		 [peculiar2.c](./02/peculiar2.c),
+		 [peculiar3.c](./02/peculiar3.c),
+		 [peculiar4.c](./02/peculiar4.c),
+		 [peculiar6.c](./02/peculiar6.c),
 		 [signal1.c](./02/signal1.c),
 		 [signal2.c](./02/signal2.c),
 		 [exec.c](./02/exec.c))
