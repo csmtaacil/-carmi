@@ -39,6 +39,8 @@ We will use slides prepared by
 
 
 1. [Processes](02_processes.pdf)
+
+1. [Processes API](02_processes api.pdf)
 		([fork.c](./02/fork.c),
 		 [peculiar1.c](./02/peculiar1.c),
 		 [peculiar2.c](./02/peculiar2.c),
@@ -48,5 +50,6 @@ We will use slides prepared by
 		 [signal1.c](./02/signal1.c),
 		 [signal2.c](./02/signal2.c),
 		 [exec.c](./02/exec.c))
+
 
 1. [Limited direct execution](03_limited direct execution.pdf)
