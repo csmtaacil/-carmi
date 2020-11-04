@@ -53,3 +53,6 @@ We will use slides prepared by
 
 
 1. [Limited direct execution](03_limited direct execution.pdf)
+
+
+1. [Scheduling](04_scheduling.pdf)
