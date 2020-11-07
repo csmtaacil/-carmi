@@ -9,7 +9,7 @@ layout: risc_he
 	{% if question.name contains "_he.html"%}
 		{% if question.shortText %}
 		<li>
-		<a href="{{question.name}}">{{question.shortText}}</a>
+		<a href="{{site.baseurl}}{{question.url}}"{{question.name}}">{{question.shortText}}</a>
 		</li>
 		{% endif %}
 	{% endif %}

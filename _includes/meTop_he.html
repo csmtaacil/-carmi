@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html dir='rtl'>
 	<head>
+	<title>{{page.title}}</title>
 	{% comment %}
 	{% include gtag.js %}
 	{% endcomment %}
-		<title> כרמי מרימוביץ, תרגילי חומרה/תוכנה</title>
 	<link rel="stylesheet" type="text/css" href="/css/main.css">
 	<link rel="icon" href="data:;base64,=">	
 	</head>
-	<body>
+	<body style="background-color: gainsboro;">
 	<header>
 	<table>
    <colgroup>
@@ -19,7 +19,7 @@
 	<tbody>
 	<tr>
 	<td class="picture">
-		<img style='height: 6Em;' src="carmi.jpg">
+		<img style='height: 6Em;' src="{{site.baseurl}}/carmi.jpg">
 	</td>
 	<td>
 	<h2>כרמי מרימוביץ</h2>
@@ -35,25 +35,20 @@
 		התוכנית היא לשים פה מגוון תרגילים בארכיטקטורה ומערכות הפעלה להנאת הקהל.
 		</h4>
 	</td>
-	{% if page.name == 'index.html' or  page.name == 'index_he.html' %}
 	<td>
-		{% if page.name == 'index_he.html' %}
-			{% assign s = 'index.html'%}
-		{% else %}
-			{% assign s = page.name | remove: "_he.html"
-							| append: "_en.html" %}
-		{% endif %}
-		<a href="{{s}}">
+	{% if page.name == 'index_he.html' %}
+			{% assign s = page.name | remove: "_he.html" %}
+		<a href="{{site.baseurl}}{{s}}">
 		<table style="border: 0; text-align: center;">
-		<tr><td style="padding: 0;">
-		<img  class="flag" src="/images/us.svg" />
+		<tr><td style="padding:0;">
+		<img  class="flag" src="{{site.baseurl}}/images/us.svg" />
 		</td></tr>
-		<tr><td style="font-size: xx-small; padding: 0;">
-			to english</td></tr>
+		<tr><td style="font-size: xx-small;  padding:0;">
+			to English</td></tr>
 		</table>
 		</a>
-	</td>
 	{% endif %}
+	</td>
 	</tr>
 	</tbody>
 	</table>
