@@ -56,3 +56,5 @@ We will use slides prepared by
 
 
 1. [Scheduling](04_scheduling.pdf)
+
+1. [Virtual memory part 1](05_vmem.pdf)
