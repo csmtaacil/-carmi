@@ -133,7 +133,7 @@ let cacheSetSize = 2 ** Math.trunc(Math.random()*5);
 let eCacheSetSize = document.getElementById("cacheSetSize");
 eCacheSetSize.innerHTML = cacheSetSize;
 let eCacheSetSize2 = document.getElementById("cacheSetSize2");
-eCacheSetSize2.innerHTML = cacheSetSize;
+if (eCacheSetSize2 != null) eCacheSetSize2.innerHTML = cacheSetSize;
 
 
 let cacheSize = cacheSetSize * (2**cacheAddressWidth);
