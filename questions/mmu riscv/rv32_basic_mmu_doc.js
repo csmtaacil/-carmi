@@ -1,5 +1,5 @@
 //
-//  x 8 6   -  3 2   m m u
+//  r v 3 2     m m u  d o c
 //
 
 let topLine = 10;
@@ -44,43 +44,12 @@ function drawField(ctx, field) {
 	ctx.stroke();
 }
 
-function cr3Draw (id)
+function satpDraw (id)
 {
 	let c = document.getElementById(id);
 	let ctx = c.getContext("2d");
-
-	ctx.moveTo(0, topLine);
-	ctx.lineTo(32*bitWidth, topLine);
-
-	ctx.moveTo(0, bottomLine);
-	ctx.lineTo(32*bitWidth, bottomLine);
 	
-	let field={};
-	field.s = 31;
-	field.e = 0;
-	field.t = "External Table Address";
-	drawField(ctx,field);
-	return;
-
-	for (let i = 0; i < 33; i++) {	
-		ctx.moveTo(i*bitWidth, topLine);
-		ctx.lineTo(i*bitWidth, bottomLine);
-	}
-
-	ctx.textAlign = "center";
-	ctx.textBaseline = "bottom";
-	for (let i = 0; i < 32; i++) {
-		ctx.fillText((32-i).toString(), i*bitWidth + bitWidth/2, topLine);
-	}
-
-	ctx.stroke();
-}
-
-function pdeDraw (id)
-{
-	let c = document.getElementById(id);
-	let ctx = c.getContext("2d");
-
+	
 	ctx.moveTo(0, topLine);
 	ctx.lineTo(32*bitWidth, topLine);
 
@@ -89,52 +58,36 @@ function pdeDraw (id)
 
 
 	let field = {};
-	field.s = 31;
-	field.e = 12;
-	field.t = "Internal table ppn";
-	drawField(ctx, field);
+	field.s=31;
+	field.t="M";
+	drawField(ctx,field);
 
-	field = {};
-	field.s = 11;
-	field.e = 9;
-	field.t = "avl";
-	drawField(ctx, field);
-	ctx.stroke();
+
+	field.s = 30;
+	field.e = 22;
+	field.t = "ASID";
+	drawField(ctx,field);
 	
-	let str = "GS0ADWURP";
-	for (let i = 0; i < str.length; i++) {
-		let field = {};
-		field.s = str.length - i - 1;
-		field.t = str.substring(i,i+1);
-		drawField(ctx,field);
-	}
+	field.s = 21;
+	field.e = 0;
+	field.t = "external tbl ppn";
+	drawField(ctx,field);	
 	
-	let explain = ["1 for valid, 0 for not valid",
-		"1 for read/write, 0 for read",
-		"1 for user mode can access; 0 otherwise",
-		"1 for write-through cache; 0 for write-back cache",
-		"1 for cache disable; 0 for cache enable",
-		"1 means page was read/written; 0 was not",
-		"",
-		"1 for page size 4MB; 0 for page size 4KB",
-		"Ignored"];
+	let x = bitWidth/2;
 	let y = bottomLine;
-	for (let i = 0; i < str.length; i++) {
-		if (explain[i] == "") continue;
-		let x = (31 - i) * bitWidth;
-		
-		x += bitWidth/2;
-		ctx.moveTo(x, bottomLine);
-		y += 10;
-		ctx.lineTo(x, y);
-		x += 10;
-		ctx.lineTo(x, y);
-		ctx.stroke();
-		ctx.textAlign = "left";
-		ctx.textBaseline = "middle";
-		ctx.fillText(explain[i], x, y);
-	}
+	ctx.moveTo(x,y);
+	y += 10;
+	
+	ctx.lineTo(x,y);
+	x += 10
+	ctx.lineTo(x,y);
+	ctx.stroke();
+	ctx.textAlign = "left";
+	ctx.textBaseline = "middle";
+	ctx.fillText("1 for virtual enabled; 0 for physical addressing",x, y);
+	return;
 }
+
 
 function pteDraw (id)
 {
@@ -150,34 +103,33 @@ function pteDraw (id)
 
 	let field = {};
 	field.s = 31;
-	field.e = 12;
-	field.t = "process ppn";
+	field.e = 10;
+	field.t = "table/process ppn";
 	drawField(ctx, field);
 
 	field = {};
-	field.s = 11;
-	field.e = 9;
-	field.t = "avl";
+	field.s = 9;
+	field.e = 8;
+	field.t = "";
 	drawField(ctx, field);
 	ctx.stroke();
 	
-	let str = "G0DACWURP";
+	let str = "VRWXUGAD";
 	for (let i = 0; i < str.length; i++) {
 		let field = {};
-		field.s = str.length - i - 1;
+		field.s = i;
 		field.t = str.substring(i,i+1);
 		drawField(ctx,field);
 	}
 	
 	let explain = ["1 for valid, 0 for not valid",
-		"1 for read/write, 0 for read",
-		"1 for user mode can access; 0 otherwise",
-		"1 for write-through cache; 0 for write-back cache",
-		"1 for cache disable; 0 for cache enable",
-		"1 means page was read/written; 0 was not",
-		"1 means write was done; 0 was not",
-		"",
-		"1 will not puge tlb etry on CR3 load;"];
+		"1 for readable page; 0 otherwise",
+		"1 for writeable page; 0 otherwise",
+		"1 for executable page; 0 otherwise",
+		"1 for user mode accessible page; 0 otherwise",
+		"1 for global page; 0 otherwise",
+		"1 means page was accessed",
+		"1 means page was written into"];
 	let y = bottomLine;
 	for (let i = 0; i < str.length; i++) {
 		if (explain[i] == "") continue;
@@ -194,6 +146,25 @@ function pteDraw (id)
 		ctx.textBaseline = "middle";
 		ctx.fillText(explain[i], x, y);
 	}
+	
+	let x = (31-8)*bitWidth;
+	ctx.moveTo(x, bottomLine);
+	y += 10;
+	ctx.lineTo(x, y);
+	x += 10;
+	ctx.lineTo(x, y);
+	ctx.stroke();
+	ctx.fillText("Free for software",x, y);
+
+	x = (31-20)*bitWidth;
+	ctx.moveTo(x, bottomLine);
+	y += 10;
+	ctx.lineTo(x, y);
+	x += 10;
+	ctx.lineTo(x, y);
+	ctx.stroke();
+	ctx.fillText("Table ppn if WXR=000; Process ppn otherwise",x, y);
+
 }
 
 
@@ -232,7 +203,6 @@ function vaDraw (id)
 
 
 
-cr3Draw("cr3");
-pdeDraw("pde");
+satpDraw("satp");
 pteDraw("pte");
 vaDraw("va");
