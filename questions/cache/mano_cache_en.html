@@ -4,12 +4,10 @@ shortText: Behavior of Cache (Mano)
 ---
 <script src="./mano_cache.js" type="module">
 </script>
-
-<p dir="rtl">
+<div style="padding-top: 0.5Em;">
 A computer system has memory of size
 <span id = "memorySize"></span>
 words and cache memory of size
-מילים וזיכרון מטמון בגודל
 <span id = "cacheSize"></span>
 memory words.
 
@@ -18,8 +16,8 @@ Each word has  width of
 bits.
 
 The cache is 
-<span id="cacheSetSize" dir="ltr"></span>-set associative.
-The block size is one and te replacement policy is LRU.
+<span id="cacheSetSize" dir="ltr"></span>-way set associative.
+The block size is one and the replacement policy is LRU.
 
 Each row (from left to right) contains the following
 fields:
@@ -28,11 +26,12 @@ valid,
 tag,
 value.
 
-The following memory acces list is given,
+The following memory access list is given,
 	from left to right:
-<div dir="ltr" id="accessList"></div>
-The cache is empty before the above access list is	attempted.
+<div  id="accessList" style="padding-top: 0.5Em; padding-bottom: 0.5Em;"></div>
 
+The cache is empty before the above access list is	attempted.
+</div>
 <div id = "debug" dir="ltr"></div>
 
 <ol>
@@ -49,7 +48,7 @@ What is the width of one cache line?
 <span id="answerCacheLineWidth" dir="ltr"></span>
 </li>
 <li>
-What is the most common valye fo the TAG fields	after
+What is the most common value fo the TAG fields	after
 	the access list was attempted?
 </li>
 <li>
