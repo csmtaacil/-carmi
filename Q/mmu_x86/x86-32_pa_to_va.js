@@ -12,7 +12,7 @@ function fillGarbage(page) {// Garbage looking as legit translation page
 }
 
 let va = Math.trunc(Math.random() * Math.pow(2,32));
-let pp = Math.trunc(Math.random() * Math.pow(2,22)) * 4096;
+let pp = Math.trunc(Math.random() * Math.pow(2,20)) * 4096;
 let pa = pp + (va % 4096);
 
 let i0 = Math.trunc(va / Math.pow(2, 22));
@@ -44,8 +44,6 @@ let extEntry = extTbl + i0 * 4;
 let inrEntry = inrTbl + i1 * 4;
 displayRam.showD(extEntry);
 displayRam.showD(inrEntry);
-console.log(extEntry.toString(16),inrEntry.toString(16),
-	inrTbl.toString(16));
 ram.writeD(extEntry, inrTbl | 7);
 //ram.writeD(inrEntry, pp | 7);
 
