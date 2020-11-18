@@ -7,12 +7,13 @@ import {DisplayRam} from "../DisplayRam.mjs";
 
 let ram = new Ram;
 ram.littleEndian = true;
-ram.numPages = Math.pow(2,20); 
+ram.numPages = (2**20); 
 
 
 let unit = Math.trunc(2 ** Math.trunc(Math.random() * 3));
 
-let value = 2 ** (unit * 8) - 1;
+let value = 2 ** (unit * 8 - 1);
+
 
 let eUnit0 = document.getElementById("unit0"+unit);
 eUnit0.style.display = "inline";
@@ -32,8 +33,8 @@ else if (unit == 4)
 
 
 let esp = address;
-let Esp = document.getElementById("esp");
-Esp.innerHTML = esp.toString(16);
+let eEsp = document.getElementById("esp");
+eEsp.innerHTML = esp.toString(16).padStart(8, "0");
 
 let e = document.getElementById("displayArea");
 let displayRam = new DisplayRam(e, ram);
@@ -52,8 +53,9 @@ displayRam.showD(address+4);
 displayRam.display();
 
 function displayAnswer() {
+	let answer = -value;
 	let eAnswer = document.getElementById("answer");
-	eAnswer.innerHTML = value.toString(16);
+	eAnswer.innerHTML = answer.toString();
 }
 
 
