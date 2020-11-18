@@ -12,11 +12,11 @@ function fillGarbage(page) {// Garbage looking as legit
 }
 
 
-let va = Math.trunc(Math.random() * Math.pow(2,32));
-let pp = Math.trunc(Math.random() * Math.pow(2,20)) * 4096;
+let va = Math.trunc(Math.random() * (2**32));
+let pp = Math.trunc(Math.random() * (2**20)) * 4096;
 let pa = pp + (va % 4096);
 
-let i0 = Math.trunc(va / Math.pow(2, 22));
+let i0 = Math.trunc(va / (2*22));
 let i1 = Math.trunc(va / 4096) % 1024;
 
 let eVa = document.getElementById("va");

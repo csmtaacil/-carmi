@@ -6,7 +6,8 @@ import {DisplayRam} from "../DisplayRam.mjs";
 
 function fillGarbage(page) {// Garbage looking as legit translation page
 	for (let o = 0; o < 4096; o += 4) {
-		let d = Math.trunc(Math.random() * (2**20)) * 4096 + 7;
+		let d = Math.trunc(Math.random() * (2**20)) * 4096 +
+						7;
 		ram.writeD(page + o, d);
 	}
 }
@@ -40,8 +41,8 @@ fillGarbage(inrTbl);
 
 let extEntry = extTbl + i0 * 4;
 let inrEntry = inrTbl + i1 * 4;
-ram.writeD(extEntry, inrTbl | 7);
-ram.writeD(inrEntry, pp | 7);
+ram.writeD(extEntry, inrTbl + 7);
+ram.writeD(inrEntry, pp + 7);
 
 for (let i = 0; i < 3; i++) {
 	let addr;
@@ -50,7 +51,7 @@ for (let i = 0; i < 3; i++) {
 		addr = extTbl + o;
 	} while (addr == extEntry);
 	let pp = ram.findUnusedPage();
-	ram.writeD(addr, pp | 7);
+	ram.writeD(addr, pp + 7);
 	fillGarbage(pp);
 	displayRam.showD(pp + Math.trunc(Math.random() * 4096));
 }
@@ -62,13 +63,14 @@ for (let i = 0; i < 3; i++) {
 		addr = inrTbl + o;
 	} while (addr == inrEntry);
 	let pp = ram.findUnusedPage();
-	ram.writeD(addr, pp | 7);
+	ram.writeD(addr, pp + 7);
 	fillGarbage(pp);
 	displayRam.showD(pp + Math.trunc(Math.random() * 4096));
 }
 
 displayRam.showD(extEntry);
 displayRam.showD(inrEntry);
+
 
 let eCr3 = document.getElementById("cr3");
 eCr3.innerHTML = extTbl.toString(16).padStart(8, "0");
