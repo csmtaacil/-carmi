@@ -106,7 +106,49 @@ class Ram {
 		this.ram[a2] = b2;
 		this.ram[a3] = b3;
 	}
+
+	readQ(addr) {
+		let a = [], b = [];
+		if (this.littleEndian) {
+			for (let i=0; i < 8; i++)
+				a[i] = addr + i;
+		} else {
+			for (let i=0; i < 8; i++)
+				a[7 - i] = addr + i;
+		}
+		
+		for (let i = 0; i < 8; i++)
+			b[i] = this.ram[a[i]];
+		
+		for (let i = 0; i < 8; i++)
+			if (b[i] == undefined) return undefined;
+		
+		let v = 0n;
+		for (let i = 0; i < 8; i++)
+			v = v * 256n + BigInt(b[7-i]);
+		return (v);
+	}
+		
+	writeQ(addr, v) {
+		let a = [], b=[];
+		if (this.littleEndian) {
+			for (let i = 0; i < 8; i++)
+				a[i] = addr + i;
+		} else {
+			for (let i = 0; i < 8; i++)
+				a[7-i] = addr + i;
+		}
+		
+		for (let i = 0; i < 8; i++) {
+			b[i] = v % 256n;
+			v = v / 256n;
+		}
 	
+		for (let i = 0; i < 8; i++) 
+			this.ram[a[i]] = Number(b[i]);
+	}
+
+
 	findUnusedPage() {
 		let pp;
 		do {

@@ -31,6 +31,7 @@ let displayRam = new DisplayRam(e, ram);
 displayRam.addressDigits = 8;
 displayRam.unit = 4;
 displayRam.unitDigits = 8;
+displayRam.addressDigits = 8;
 displayRam.rtl = false;
 
 

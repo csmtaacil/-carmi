@@ -1,10 +1,10 @@
 ---
 layout: risc_en
 ---
-<script src="./x86-32_basic_mmu_doc.js" type="module">
+<script src="./x86-32_pae_basic_mmu_doc.js" type="module">
 </script>	
-<h2>(x86-32) Basic mmu doc</h2>
-
+<h2>(x86-32 pae) Basic mmu doc</h2>
+	
 
 
 <h3 style="padding-top: 0.5Em;">cr3</h3>
@@ -19,14 +19,25 @@ Loading of CR3 purges the TLB unless
 
 <h3 style="padding-top: 0.5Em;">External Page Table Entry</h3>
 An entry in the external table has the following format:
+<canvas id="pee" width="1000" height="130" style="padding-top: 0.5Em;">
+</canvas>
+For our purpose only the rightmost three bits 
+	are	of importance.
+In fact only the P bit is relevant
+since the page size we use is always 4KB and both the U and R
+bit are always one.
+<br/>
+<h3 style="padding-top: 0.5Em;">Middle Page Table Entry</h3>
+An entry in the middle table has the following format:
 <canvas id="pde" width="1000" height="130" style="padding-top: 0.5Em;">
 </canvas>
 For our purpose only the rightmost three bits 
 	are	of importance.
 In fact only the P bit is relevant
-since e page size we use is always 4KB and both the U and R
+since the page size we use is always 4KB and both the U and R
 bit are always one.
 <br/>
+
 <h3 style="padding-top: 0.5Em;">Internal Page Table Entry</h3>
 The internal table entries are almost identical
 	to the external table entries.

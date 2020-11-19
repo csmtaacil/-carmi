@@ -41,6 +41,12 @@ class DisplayRam {
 		this.addImportantAddress(addr+3);
 	}
 	
+	showQ(addr) {
+		for (let i = 0; i < 8; i++) 
+			this.addImportantAddress(addr + i);
+	}
+
+
 	addImportantAddress(addr) {
 		if (this.importantAddresses == null) {
 			this.importantAddresses = [];
@@ -76,6 +82,9 @@ class DisplayRam {
 		
 		case 4:
 			return this.ram.readD(key);
+
+		case 8:
+			return this.ram.readQ(key);
 		}
 	}
 	
@@ -85,7 +94,9 @@ class DisplayRam {
 			
 		let eHtml = document.getElementsByTagName("html");
 		eHtml = eHtml[0];
-		let tDump, tSigned, tLtr, tByte, tWord,tDword, tBinary, tOctal, tDecimal, tHexa;
+		let tDump, tSigned, tLtr,
+				tByte, tWord, tDword, tQword,
+				tBinary, tOctal, tDecimal, tHexa;
 		if (eHtml.dir == 'rtl') {
 			tDump = "צייר טבלה מחדש";
 			tSigned = "עם סימן";
@@ -93,6 +104,7 @@ class DisplayRam {
 			tByte="בית";
 			tWord="מילה";
 			tDword="מילה כפולה";
+			tQword="מילה מרובעת";
 			tBinary = "בינרי";
 			tOctal = "אוקטלי";
 			tDecimal = "עשרוני";
@@ -104,6 +116,7 @@ class DisplayRam {
 			tByte="Byte";
 			tWord="Word";
 			tDword="Double word";
+			tQword="Quad word";
 			tBinary = "Binary";
 			tDecimal = "Decimal";
 			tOctal = "Octdal";
@@ -135,7 +148,8 @@ class DisplayRam {
 			s += '<span style="border: 1px solid black; margin-inline-start: 2px; margin-top: 4px; white-space: nowrap;">';
 			s += '<input type="radio" id="displayRam.byte">' + tByte;
 			s += '<input type="radio" id="displayRam.word">' + tWord;
-			s += '<input type="radio" id="displayRam.dword">' + tDword;;
+			s += '<input type="radio" id="displayRam.dword">' + tDword;
+			s += '<input type="radio" id="displayRam.qword">' + tQword;
 			s += "</span>";
 			//s += "</td></tr>";
 			//s += "</table>";	
@@ -298,6 +312,11 @@ class DisplayRam {
 				function() {that.clickDword();});
 		eDword.checked = (this.unit == 4);
 
+		that = this;
+		let eQword = document.getElementById("displayRam.qword");
+		eQword.addEventListener("click",
+				function() {that.clickQword();});
+		eQword.checked = (this.unit == 8);
 	}
 	
 	clickLtr() {
@@ -348,4 +367,9 @@ class DisplayRam {
 		this.unit = 4;
 		this.display();
 	}
+	
+	clickQword() {
+		this.unit = 8;
+		this.display();
+	}	
 }
