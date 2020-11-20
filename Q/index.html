@@ -2,14 +2,4 @@
 layout: risc_en
 ---
 <h1>Hardware/Software questions.</h1>
-<ol>
-{% for  question in site.pages %}
-	{% if question.name contains "_en.html"%}
-		{% if question.shortText %}
-		<li>
-		<a href="{{site.baseurl}}{{question.url}}">{{question.shortText}}</a>
-		</li>
-		{% endif %}
-	{% endif %}
-{% endfor %}
-</ol>
+{% include_relative index.inc %}
