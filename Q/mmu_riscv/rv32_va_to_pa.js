@@ -6,17 +6,17 @@ import {DisplayRam} from "../DisplayRam.mjs";
 
 function fillGarbage(page) {// Garbage looking as legit
 	for (let o = 0; o < 4096; o += 4) {
-		let d = Math.trunc(Math.random() * 1024) * 1024 + 7;
+		let d = (2**31) + Math.trunc(Math.random()* (2**22) );
 		ram.writeD(page + o, d);
 	}
 }
 
 
 let va = Math.trunc(Math.random() * (2**32));
-let pp = Math.trunc(Math.random() * (2**20)) * 4096;
+let pp = Math.trunc(Math.random() * (2**22)) * 4096;
 let pa = pp + (va % 4096);
 
-let i0 = Math.trunc(va / (2*22));
+let i0 = Math.trunc(va / (2**22));
 let i1 = Math.trunc(va / 4096) % 1024;
 
 let eVa = document.getElementById("va");
@@ -24,7 +24,7 @@ eVa.innerHTML = va.toString(16).padStart(8, "0");
 
 let ram = new Ram;
 ram.littleEndian = true;
-ram.numPages = Math.pow(2,22);  // Sign issue?!
+ram.numPages = (2**22);  // Sign issue?!
 
 let e = document.getElementById("displayArea");
 let displayRam = new DisplayRam(e, ram);
@@ -41,7 +41,7 @@ fillGarbage(inrTbl);
 
 let extEntry = extTbl + i0 * 4;
 let inrEntry = inrTbl + i1 * 4;
-ram.writeD(extEntry, Math.trunc(inrTbl/4) + 7);
+ram.writeD(extEntry, Math.trunc(inrTbl/4));
 ram.writeD(inrEntry, Math.trunc(pp/4) + 7);
 
 for (let i = 0; i < 3; i++) {
@@ -51,9 +51,9 @@ for (let i = 0; i < 3; i++) {
 		addr = extTbl + o;
 	} while (addr == extEntry);
 	let pp = ram.findUnusedPage();
-	ram.writeD(addr, Math.trunc(pp/4) + 7);
+	ram.writeD(addr, Math.trunc(pp/4));
 	fillGarbage(pp);
-	displayRam.showD(pp + Math.trunc(Math.random() * 4096));
+	displayRam.showD(pp + Math.trunc(Math.random() * (4096-4)));
 }
 
 for (let i = 0; i < 3; i++) {
@@ -63,17 +63,17 @@ for (let i = 0; i < 3; i++) {
 		addr = inrTbl + o;
 	} while (addr == inrEntry);
 	let pp = ram.findUnusedPage();
-	ram.writeD(addr, Math.trunc(pp/4) | 7);
+	ram.writeD(addr, Math.trunc(pp/4) + 7);
 	fillGarbage(pp);
-	displayRam.showD(pp + Math.trunc(Math.random() * 4096));
+	displayRam.showD(pp + Math.trunc(Math.random() * (4096-4)));
 }
 
 displayRam.showD(extEntry);
 displayRam.showD(inrEntry);
 
 let eSatp = document.getElementById("satp");
-let satp = Math.pow(2,31) +
-			Math.trunc(Math.random() * 512) * Math.pow(2,22) + 
+let satp = (2**31) +
+			Math.trunc(Math.random() * 512) * (2**22) + 
 			Math.trunc(extTbl / 4096);
 eSatp.innerHTML = satp.toString(16).padStart(8, "0");
 

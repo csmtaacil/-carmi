@@ -14,12 +14,21 @@ let unit = Math.trunc(2 ** Math.trunc(Math.random() * 3));
 
 let value = 2 ** (unit * 8 - 1);
 
+let cType;
+if (unit == 1)
+	cType = "char";
+else if (unit == 2)
+	cType = "short";
+else if (unit == 4)
+	cType = "int";
+else if (unit == 4)
+	cType = "long int`";
 
-let eUnit0 = document.getElementById("unit0"+unit);
-eUnit0.style.display = "inline";
+let eFunctionType = document.getElementById("functionType");
+eFunctionType.innerHTML = cType;
 
-let eUnit1 = document.getElementById("unit1"+unit);
-eUnit1.style.display = "inline";
+let eArgumentType = document.getElementById("argumentType");
+eArgumentType.innerHTML = cType;
 
 
 let pageAddress = ram.findUnusedPage();
