@@ -5,9 +5,15 @@ import {Ram} from "../Ram.mjs";
 import {DisplayRam} from "../DisplayRam.mjs";
 
 function fillGarbage(page) {// Garbage looking as legit
+	let bits;
+	if (Math.random() < 0.5)
+		bits = 1;
+	else
+		bits = 15;
+	
 	for (let o = 0; o < 4096; o += 4) {
-		let d = (2**31) + Math.trunc(Math.random()* (2**22) );
-		ram.writeD(page + o, d);
+		let d = Math.trunc(Math.random()* (2**20) ) * 1024;
+		ram.writeD(page + o, d + bits);
 	}
 }
 
@@ -36,13 +42,19 @@ displayRam.rtl = false;
 
 let extTbl = ram.findUnusedPage();
 let inrTbl = ram.findUnusedPage();
-fillGarbage(extTbl);
-fillGarbage(inrTbl);
+for (let o = 0; o < 4096; o += 4) {
+	let d = Math.trunc(Math.random()* (2**20) ) * 1024;
+	ram.writeD(extTbl + o, d + 1);
+}
+for (let o = 0; o < 4096; o += 4) {
+	let d = Math.trunc(Math.random()* (2**20) ) * 1024;
+	ram.writeD(inrTbl + o, d + 15);
+}
 
 let extEntry = extTbl + i0 * 4;
 let inrEntry = inrTbl + i1 * 4;
-ram.writeD(extEntry, Math.trunc(inrTbl/4));
-ram.writeD(inrEntry, Math.trunc(pp/4) + 7);
+ram.writeD(extEntry, Math.trunc(inrTbl/4) + 1);
+ram.writeD(inrEntry, Math.trunc(pp/4) + 15);
 
 for (let i = 0; i < 3; i++) {
 	let addr;
