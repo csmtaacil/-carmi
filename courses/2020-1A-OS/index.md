@@ -57,7 +57,11 @@ We will use slides prepared by
 
 1. [Virtual memory part 1](05_vmem.pdf)
 
-1. [Paging](06_paging.pdf)
+1. [Paging](06_pt 1 paging.pdf)
+
+1. [Address translation examples](../../Q/mmu_x86/x86-32_va_to_pa_en.html)
+
+1. [TLB](06_pt 2 TLB.pdf)
 
 1. [Swapping](07_swapping.pdf)
 
