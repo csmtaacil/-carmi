@@ -65,3 +65,4 @@ We will use slides prepared by
 
 1. [Swapping](07_swapping.pdf)
 
+1.  [Threads](08_threads.pdf)
