@@ -59,10 +59,12 @@ We will use slides prepared by
 
 1. [Paging](06_pt 1 paging.pdf)
 
-1. [Address translation examples](../../Q/mmu_x86/x86-32_va_to_pa_en.html)
+1. [Paging: Address translation examples](../../Q/mmu_x86/x86-32_va_to_pa_en.html)
 
-1. [TLB](06_pt 2 TLB.pdf)
+1. [Paging: TLB](06_pt 2 TLB.pdf)
 
-1. [Swapping](07_swapping.pdf)
+1. [Paging: Swapping](07_swapping.pdf)
 
 1.  [Threads](08_threads.pdf)
+
+1. [Locks](09_locks.pdf)
