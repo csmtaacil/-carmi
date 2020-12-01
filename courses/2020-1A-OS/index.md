@@ -68,3 +68,6 @@ We will use slides prepared by
 1.  [Threads](08_threads.pdf)
 
 1. [Locks](09_locks.pdf)
+
+1. [Synchronization](10_synchronization.pdf)
+
