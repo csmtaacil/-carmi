@@ -73,3 +73,4 @@ We will use slides prepared by
 
 1. [Synchronization](10_synchronization.pdf)
 
+1.  [I/O & Disks](13_io.pdf)
