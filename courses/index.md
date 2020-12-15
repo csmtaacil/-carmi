@@ -6,7 +6,7 @@ title: Carmi Merimovich, Courses dtaught
 
 ## (I will, at some point, fill in the history... In the meantime historic details can be found in this [unmainted site.](http://www2.mta.ac.il/~carmi))
 		
-Upcoming Semester
+Current Semester
 - [2020-1A Introduction to Operating Systems](2020-1A-OS/)
 
 Past Semesters
