@@ -71,6 +71,12 @@ We will use slides prepared by
 
 1. [Locks pt. 2](09_locks pt 2.pdf)
 
-1. [Synchronization](10_synchronization.pdf)
+1. [slot]
 
-1.  [I/O & Disks](13_io.pdf)
+1. [Synchronization pt. 1](10_synchronization - pt 1.pdf)
+
+1. [Synchronization pt. 2](10_synchronization - pt 2.pdf)
+
+1.  [I/O](13_io.pdf)
+
+1.  [I/O - Disks](13_io - Disk.pdf)

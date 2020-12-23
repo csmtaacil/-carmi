@@ -179,9 +179,9 @@ class DisplayRam {
 						b = "border-left: 1px black solid;";
 					else
 						b = "border-right: 1px black solid;";
-					let row = "<td style='border-bottom: 1px solid black; border-top: 1px solid black;" + b + "'></td>";
+					let row = "<td style='border-bottom: 1px solid black; border-top: 1px solid black; padding: 10px;" + b + "'></td>";
 					for (let ii = 0; ii < cols; ii++) {
-						let c = "<td style='text-align: center; border-bottom: 1px solid black; border-top:1px solid black;	'>";
+						let c = "<td style='text-align: center; border-bottom: 1px solid black; border-top:1px; padding: 10px; solid black;	'>";
 						c += (ii * this.unit).toString(16);
 						c += "</td>";
 						if (this.rtl) 
