@@ -81,4 +81,4 @@ We will use slides prepared by
 
 1.  [I/O - Disks](13_io - Disk.pdf)
 
-1. [File system](15_fs.pdf)
+1. [File system](15_fs.pdf)  [Silberschatz ch 12](121 Silberschatz ch12, file system implementation.ppt)
