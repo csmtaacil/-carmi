@@ -81,4 +81,8 @@ We will use slides prepared by
 
 1.  [I/O - Disks](13_io - Disk.pdf)
 
-1. [File system](15_fs.pdf)  [Silberschatz ch 12](121 Silberschatz ch12, file system implementation.ppt)
+1. [File system pt. 1](15_fs pt 1.pdf)  [Silberschatz ch 12](15_fs pt 1 121 Silberschatz ch12, file system implementation.ppt)
+
+1. [File system pt. 2](15_fs pt 2.pdf) [xv6 name layer](15_fs pt 2 Lec 200 name layer I slides.pdf)
+
+1. [Journaling](16_journal.pdf)
