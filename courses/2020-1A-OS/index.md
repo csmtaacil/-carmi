@@ -86,3 +86,7 @@ We will use slides prepared by
 1. [File system pt. 2](15_fs pt 2.pdf) [xv6 name layer](15_fs pt 2 Lec 200 name layer I slides.pdf)
 
 1. [Journaling](16_journal.pdf)
+
+1.
+
+1. [Log File System](17_lfs.pdf)
