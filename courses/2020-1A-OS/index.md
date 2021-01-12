@@ -87,6 +87,6 @@ We will use slides prepared by
 
 1. [Journaling pt. 1](16_journal.pdf)
 
-1. [Journaling pt. 2]
+1. Journaling pt. 2
 
 1. [Log File System](17_lfs.pdf)
